@@ -1,0 +1,1 @@
+delete from ticket where id_ticket = :id

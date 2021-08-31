@@ -1,0 +1,1 @@
+select id_seats,number_seat,available,id_ticket where id_ticket = :idTicke

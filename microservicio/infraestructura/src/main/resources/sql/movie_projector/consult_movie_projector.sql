@@ -1,0 +1,1 @@
+select  id_movie_projector, date_movie_projector,hour_movie_projector,id_movie,id_cinema from movie_projector where id_movie_projector = :idMovieProjector

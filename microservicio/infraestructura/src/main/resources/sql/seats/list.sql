@@ -1,0 +1,1 @@
+select id_seats,number_seat,available from seats

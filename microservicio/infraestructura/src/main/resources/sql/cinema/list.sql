@@ -1,0 +1,1 @@
+select id_cinema,name_cinema,place,price_function from cinema

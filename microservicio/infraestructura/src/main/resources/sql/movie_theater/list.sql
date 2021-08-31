@@ -1,0 +1,1 @@
+select id_movie_theater,number_theater,number_seats from movie_theater

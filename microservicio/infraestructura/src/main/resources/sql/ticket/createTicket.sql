@@ -1,0 +1,1 @@
+insert into ticket(id_client,amount,id_movie_projector) values (:idClient, :amount, :idMovieProjector)
