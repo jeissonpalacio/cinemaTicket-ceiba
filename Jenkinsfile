@@ -38,7 +38,7 @@ pipeline {
       steps{
         echo "------------>Compile & Unit Tests<------------"
         sh 'chmod +x comun/gradlew'
-        sh 'comun/gradlew --b .build.gradle test'
+        sh 'comun/gradlew --b ./build.gradle test'
 
       }
     }
