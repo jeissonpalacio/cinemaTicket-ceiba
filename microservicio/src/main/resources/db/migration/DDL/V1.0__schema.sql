@@ -5,3 +5,5 @@ create table usuario (
  fecha_creacion datetime null,
  primary key (id)
 );
+
+
