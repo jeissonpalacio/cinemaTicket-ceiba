@@ -7,3 +7,10 @@ create table usuario (
 );
 
 
+create TABLE movie(
+	id_movie INT AUTO_INCREMENT PRIMARY KEY,
+    name_movie VARCHAR(60),
+    type_movie VARCHAR(60),
+    lenght VARCHAR(30),
+    rating int
+);
