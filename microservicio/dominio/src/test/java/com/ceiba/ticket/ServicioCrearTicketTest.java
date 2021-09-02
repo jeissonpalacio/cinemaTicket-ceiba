@@ -53,7 +53,7 @@ public class ServicioCrearTicketTest {
         Mockito.when(repositorioSeat.consultavailable(Mockito.anyInt())).thenReturn(1L);
         ServicioCrearTicket servicioCrearTicket = Mockito.mock(ServicioCrearTicket.class);
         servicioCrearTicket.validarDisponibilidad(1);
-        Mockito.verify(servicioCrearTicket,Mockito.times(1)).validarDisponibilidad(1);
+        Mockito.verify(servicioCrearTicket).validarDisponibilidad(1);
 
     }
 
