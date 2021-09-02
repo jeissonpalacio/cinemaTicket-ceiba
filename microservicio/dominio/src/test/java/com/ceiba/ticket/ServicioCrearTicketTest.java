@@ -30,6 +30,16 @@ public class ServicioCrearTicketTest {
         BasePrueba.assertThrows(() -> servicioCrearTicket.validarExistenciaSeat(1), ExcepcionExistencia.class,"No existe el seat");
     }
 
+    @Test
+    public void validarExistenciaSeatTestSuccesful(){
+        RepositorioTicket repositorioTicket = Mockito.mock(RepositorioTicket.class);
+        RepositorioSeat repositorioSeat = Mockito.mock(RepositorioSeat.class);
+        MovieProjectorRepositorio movieProjectorRepositorio = Mockito.mock(MovieProjectorRepositorio.class);
+        Mockito.when(repositorioSeat.validarSeat(Mockito.anyInt())).thenReturn(true);
+        ServicioCrearTicket servicioCrearTicket = new ServicioCrearTicket(repositorioTicket,repositorioSeat,movieProjectorRepositorio);
+        servicioCrearTicket.validarExistenciaSeat(1);
+        Mockito.verify(repositorioSeat,Mockito.atLeastOnce()).validarSeat(1);
+    }
 
     @Test
     public void validarDisponibilidadTest(){
