@@ -8,3 +8,4 @@ insert into seats(number_seat,available,id_movie_projector) VALUES('A3',1,1);
 insert into seats(number_seat,available,id_movie_projector) VALUES('A4',1,1);
 insert into seats(number_seat,available,id_movie_projector) VALUES('A5',1,1);
 insert into cinema(name_cinema,place,price_function) VALUES('FLORIDA','ROBLEDO',15000.00);
+insert into ticket(id_client,amount,id_movie_projector) VALUES (1,15000.00,1);

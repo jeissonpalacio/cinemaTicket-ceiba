@@ -24,7 +24,6 @@ public class ManejadorCrearTicket implements ManejadorComandoRespuesta<ComandoTi
     @Override
     public ComandoRespuesta<Long> ejecutar(ComandoTicket comandoTicket) {
         Ticket ticket = this.fabricaTicket.crear(comandoTicket);
-        System.out.println(ticket.getIdSeats());
         Long idTicket = this.servicioCrearTicket.crearServicioTicket(ticket);
         return new ComandoRespuesta<>(idTicket);
     }

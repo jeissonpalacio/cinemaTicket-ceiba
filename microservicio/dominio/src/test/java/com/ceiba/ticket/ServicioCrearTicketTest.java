@@ -45,6 +45,20 @@ public class ServicioCrearTicketTest {
     }
 
     @Test
+    public void validarDisponibilidadTestSuccesful(){
+        RepositorioTicket repositorioTicket = Mockito.mock(RepositorioTicket.class);
+        RepositorioSeat repositorioSeat = Mockito.mock(RepositorioSeat.class);
+        MovieProjectorRepositorio movieProjectorRepositorio = Mockito.mock(MovieProjectorRepositorio.class);
+
+        Mockito.when(repositorioSeat.consultavailable(Mockito.anyInt())).thenReturn(1L);
+        ServicioCrearTicket servicioCrearTicket = Mockito.mock(ServicioCrearTicket.class);
+        servicioCrearTicket.validarDisponibilidad(1);
+        Mockito.verify(servicioCrearTicket,Mockito.times(1)).validarDisponibilidad(1);
+
+    }
+
+
+    @Test
     public void purchaseEnabledDatePastTest(){
         LocalDate date = LocalDate.now().minusDays(1);
         LocalTime sixThirty = LocalTime.now().minus(Duration.ofHours(1));
@@ -62,7 +76,6 @@ public class ServicioCrearTicketTest {
     public void purchaseEnabledHoursTest(){
         LocalDate date = LocalDate.now();
         LocalTime sixThirty = LocalTime.now().minus(Duration.ofMinutes(50));
-        //System.out.println("date "+date+" tiempo " + sixThirty);
         RepositorioTicket repositorioTicket = Mockito.mock(RepositorioTicket.class);
         RepositorioSeat repositorioSeat = Mockito.mock(RepositorioSeat.class);
         MovieProjectorRepositorio movieProjectorRepositorio = Mockito.mock(MovieProjectorRepositorio.class);
@@ -71,16 +84,6 @@ public class ServicioCrearTicketTest {
 
 
     }
-
-    @Test
-    public void validatePriceTest(){
-        RepositorioTicket repositorioTicket = Mockito.mock(RepositorioTicket.class);
-        RepositorioSeat repositorioSeat = Mockito.mock(RepositorioSeat.class);
-        MovieProjectorRepositorio movieProjectorRepositorio = Mockito.mock(MovieProjectorRepositorio.class);
-        ServicioCrearTicket servicioCrearTicket = new ServicioCrearTicket(repositorioTicket,repositorioSeat,movieProjectorRepositorio);
-        BasePrueba.assertThrows(()->servicioCrearTicket.validatePrice(0), ExcepcionCantidad.class,"error de cantidad");
-    }
-
     @Test
     public void calculateHalfPriceTest(){
         LocalDate date = LocalDate.of(2021, 9, 2);

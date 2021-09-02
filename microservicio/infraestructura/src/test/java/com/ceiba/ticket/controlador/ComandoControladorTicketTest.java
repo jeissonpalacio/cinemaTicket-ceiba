@@ -30,9 +30,9 @@ public class ComandoControladorTicketTest {
     @Autowired
     private MockMvc mocMvc;
 
-
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     @Test
-    @Order(1)
+    @Order(2)
     public void crear() throws Exception{
         // arrange
         ComandoTicket ticket = new ComandoTicketTestDataBuilder().build();
@@ -42,15 +42,15 @@ public class ComandoControladorTicketTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(ticket)))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{'valor': 1}"));
+                .andExpect(content().json("{'valor': 2}"));
     }
 
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     @Test
-    @Order(2)
+    @Order(1)
     public void actualizar() throws Exception{
         // arrange
-        Long id = 16L;
+        Long id = 1L;
         ComandoTicket ticket = new ComandoTicketTestDataBuilder().build();
 
         // act - assert
@@ -59,10 +59,7 @@ public class ComandoControladorTicketTest {
                         .content(objectMapper.writeValueAsString(ticket)))
                 .andExpect(status().isOk());
     }
-    /**
-     * No se borra y re crea la data de prueba?
-     * @throws Exception
-     */
+
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     @Test
     @Order(3)

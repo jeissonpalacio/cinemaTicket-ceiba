@@ -1,7 +1,6 @@
 package com.ceiba.ticket.servicio.testdatabuilder;
 
 import com.ceiba.ticket.comando.ComandoTicket;
-import com.ceiba.usuario.servicio.testdatabuilder.ComandoUsuarioTestDataBuilder;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,12 +14,15 @@ public class ComandoTicketTestDataBuilder {
     private List<Integer> idSeats;
 
     public ComandoTicketTestDataBuilder(){
-            this.idTicket = 1L;
             this.idClient = 1;
             this.amount = 15000.00;
             this.idMovieProjector = 1;
             this.idSeats =  Arrays.asList(1);
 
+    }
+    public ComandoTicketTestDataBuilder conIdTicket(Long idTicke){
+            this.idTicket = idTicke;
+            return this;
     }
 
     public ComandoTicket build(){

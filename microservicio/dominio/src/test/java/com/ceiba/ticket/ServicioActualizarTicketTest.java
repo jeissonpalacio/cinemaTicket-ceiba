@@ -30,18 +30,6 @@ public class ServicioActualizarTicketTest {
     }
 
     @Test
-    public void validarCantidadTest(){
-        List<Integer> list = Collections.emptyList();
-        RepositorioSeat repositorioSeat = Mockito.mock(RepositorioSeat.class);
-        RepositorioTicket repositorioTicket = Mockito.mock(RepositorioTicket.class);
-        MovieProjectorRepositorio movieProjectorRepositorio = Mockito.mock(MovieProjectorRepositorio.class);
-        ServicioActualizarTicket servicioActualizarTicket = new ServicioActualizarTicket(repositorioTicket,repositorioSeat,movieProjectorRepositorio);
-
-        BasePrueba.assertThrows(()->servicioActualizarTicket.validarCantidad(list), ExcepcionCantidad.class,"Solo puede tener dos asientos");
-    }
-
-
-    @Test
     public void validarDisponibilidadTest(){
         RepositorioSeat repositorioSeat = Mockito.mock(RepositorioSeat.class);
         RepositorioTicket repositorioTicket = Mockito.mock(RepositorioTicket.class);

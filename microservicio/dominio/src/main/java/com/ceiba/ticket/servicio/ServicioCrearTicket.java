@@ -22,7 +22,6 @@ public class ServicioCrearTicket {
     private static final String LA_SILLA_ESTA_RESERVADA = "La silla esta siendo reservada";
     private static final String ERROR_DE_TIEMPO = "error de tiempo, la funcion ya paso";
     private static final String NO_SE_PUEDE_HACER_UNA_HORA_ANTES = "error reserva antes de una hora";
-    private static final String ERROR_CANTIDAD_INCORRECTA = "error de cantidad";
 
     private final RepositorioTicket repositorioTicket;
     private final RepositorioSeat  repositorioSeat;
@@ -61,15 +60,8 @@ public class ServicioCrearTicket {
             }
         }
     }
-    public void validatePrice(double price){
-        if(price<=0){
-            throw new ExcepcionCantidad(ERROR_CANTIDAD_INCORRECTA);
-        }
-    }
 
     public Double calculateHalfPrice(LocalDate date, double price){
-        validatePrice(price);
-
         if(date.getDayOfWeek() == DayOfWeek.TUESDAY || DayOfWeek.THURSDAY == date.getDayOfWeek()){
             price = price/2;
         }
@@ -84,7 +76,7 @@ public class ServicioCrearTicket {
             validarDisponibilidad(e);
         });
         // puede ir aqui sin tener que crear un metodo de que retorne un movieProjector
-        MovieProjector movieProjector = this.movieProjectorRepositorio.findbyMovieProjectorForId(ticket.getIdMovieProjector());;
+        MovieProjector movieProjector = this.movieProjectorRepositorio.findbyMovieProjectorForId(ticket.getIdMovieProjector());
 
 
         // Este metodo debe de ser llamado desde ticket porque no contiene acceso a datos o se queda en el servicio

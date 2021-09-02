@@ -18,6 +18,7 @@ public class Ticket {
     private static final String SE_DEBE_TENER_UN_ID_DE_LA_PROYECCION = "Se debe tener un id de la proyeccion";
     private static final int LONGITUD_MINIMA_AMOUNT = 8;
     private static final String SOLO_PUEDE_TENER_DOS_ASIENTOS = "Solo puede tener dos asientos";
+    private static final String ERROR_CANTIDAD_INCORRECTA = "error de cantidad";
 
 
     Long idTicket;
@@ -26,8 +27,6 @@ public class Ticket {
     Integer idMovieProjector;
     List<Integer> idSeats;
 
-    // El modelo solo debe tener atributos del modelo en la base de datos o puede tener otros atributos necesarios
-    // para una logica de negocio
 
     public Ticket(Integer idClient,Double amount,Integer idMovieProjector){
         validarObligatorio(idClient,SE_DEBE_INGRESAR_ID_DEL_CLIENT);
@@ -39,6 +38,8 @@ public class Ticket {
         this.idMovieProjector = idMovieProjector;
     }
     public Ticket(Integer idClient,Double amount,Integer idMovieProjector,List<Integer> idSeats){
+        validatePrice(amount);
+        validarCantidad(idSeats);
         validarObligatorio(idClient,SE_DEBE_INGRESAR_ID_DEL_CLIENT);
         validarObligatorio(amount,SE_DEBE_TENER_UN_MONTO);
         ValidadorArgumento.validarPositivo(amount,SE_DEBE_TENER_UN_MONTO_REAL);
@@ -50,16 +51,22 @@ public class Ticket {
     }
 
     public Ticket(Long idTicket, Integer idClient, Double amount, Integer idMovieProjector,List<Integer> idSeats) {
+        validatePrice(amount);
+        validarCantidad(idSeats);
         validarObligatorio(idClient,SE_DEBE_INGRESAR_ID_DEL_CLIENT);
         validarObligatorio(amount,SE_DEBE_TENER_UN_MONTO);
         ValidadorArgumento.validarPositivo(amount,SE_DEBE_TENER_UN_MONTO_REAL);
         validarObligatorio(idMovieProjector,SE_DEBE_TENER_UN_ID_DE_LA_PROYECCION);
-        validarCantidad(idSeats);
         this.idTicket = idTicket;
         this.idClient = idClient;
         this.amount = amount;
         this.idMovieProjector = idMovieProjector;
         this.idSeats = idSeats;
+    }
+    public void validatePrice(double price){
+        if(price<=0){
+            throw new ExcepcionCantidad(ERROR_CANTIDAD_INCORRECTA);
+        }
     }
 
     public void validarCantidad(List<Integer> listId){
