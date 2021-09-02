@@ -10,5 +10,5 @@ public interface RepositorioSeat {
 
     Long consultavailable(Integer idSeat);
 
-    void actualizarSeatAvailable(Long idTicket,Integer available);
+    void actualizarSeatAvailable(Long idTicket,Long newidTicket,Integer available);
 }

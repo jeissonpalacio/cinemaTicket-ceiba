@@ -1,6 +1,7 @@
 package com.ceiba.ticket;
 
 import com.ceiba.BasePrueba;
+import com.ceiba.movie_projector.puerto.repositorio.MovieProjectorRepositorio;
 import com.ceiba.ticket.excepcion.ExcepcionExistenciaTicket;
 import com.ceiba.ticket.excepcion.ExcepcionTiempoDeCambio;
 import com.ceiba.ticket.puerto.repositorio.RepositorioTicket;
@@ -16,7 +17,8 @@ public class ServicioEliminarTicketTest {
     @Test
     public void validateTimeLimitTest(){
         RepositorioTicket repositorioTicket = Mockito.mock(RepositorioTicket.class);
-        ServicioEliminarTicket servicioEliminarTicket = new ServicioEliminarTicket(repositorioTicket);
+        MovieProjectorRepositorio movieProjectorRepositorio = Mockito.mock(MovieProjectorRepositorio.class);
+        ServicioEliminarTicket servicioEliminarTicket = new ServicioEliminarTicket(repositorioTicket,movieProjectorRepositorio);
         LocalDate time = LocalDate.now();
         BasePrueba.assertThrows(()->servicioEliminarTicket.validateTimeLimit(time), ExcepcionTiempoDeCambio.class,"El tiempo de cambio paso");
     }
@@ -24,7 +26,8 @@ public class ServicioEliminarTicketTest {
     @Test
     public void validateExistTest(){
         RepositorioTicket repositorioTicket = Mockito.mock(RepositorioTicket.class);
-        ServicioEliminarTicket servicioEliminarTicket = new ServicioEliminarTicket(repositorioTicket);
+        MovieProjectorRepositorio movieProjectorRepositorio = Mockito.mock(MovieProjectorRepositorio.class);
+        ServicioEliminarTicket servicioEliminarTicket = new ServicioEliminarTicket(repositorioTicket,movieProjectorRepositorio);
         Mockito.when(repositorioTicket.validarExiste(Mockito.anyLong())).thenReturn(false);
         BasePrueba.assertThrows(()->servicioEliminarTicket.validateExist(1L),ExcepcionExistenciaTicket.class,"No existe el ticket");
 

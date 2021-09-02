@@ -55,9 +55,9 @@ public class RepositorioSeatMySql implements RepositorioSeat {
     }
 
     @Override
-    public void actualizarSeatAvailable(Long idTicket, Integer available) {
+    public void actualizarSeatAvailable(Long idTicket,Long newidTicket, Integer available) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("IdTicketNew",null);
+        paramSource.addValue("IdTicketNew",newidTicket);
         paramSource.addValue("idTicket", idTicket);
         paramSource.addValue("available",available);
         this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlSeatUpdateAvailable, paramSource);

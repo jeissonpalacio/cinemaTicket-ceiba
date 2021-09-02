@@ -10,9 +10,11 @@ public class FabricaTicket {
     public Ticket crear(ComandoTicket comandoTicket){
 
         if(comandoTicket.getIdTicket()!=null){
-            return new Ticket(comandoTicket.getIdTicket(),comandoTicket.getIdClient(),comandoTicket.getAmount(),comandoTicket.getIdMovieProjector());
+            return new Ticket(comandoTicket.getIdTicket(),comandoTicket.getIdClient(),
+                    comandoTicket.getAmount(),comandoTicket.getIdMovieProjector(),comandoTicket.getIdSeats());
 
         }
-         return new Ticket(comandoTicket.getIdClient(),comandoTicket.getAmount(),comandoTicket.getIdMovieProjector());
+         return new Ticket(comandoTicket.getIdClient(),comandoTicket.getAmount(),
+                 comandoTicket.getIdMovieProjector(),comandoTicket.getIdSeats());
     }
 }

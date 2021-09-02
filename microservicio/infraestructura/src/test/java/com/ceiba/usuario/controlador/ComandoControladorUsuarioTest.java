@@ -56,7 +56,6 @@ public class ComandoControladorUsuarioTest {
                 .content(objectMapper.writeValueAsString(usuario)))
                 .andExpect(status().isOk());
     }
-
     @Test
     public void eliminar() throws Exception {
         // arrange

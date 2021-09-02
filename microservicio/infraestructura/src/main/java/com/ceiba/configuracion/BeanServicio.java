@@ -1,9 +1,7 @@
 package com.ceiba.configuracion;
 
 import com.ceiba.movie_projector.puerto.repositorio.MovieProjectorRepositorio;
-import com.ceiba.movie_projector.servicio.ServicioConsultaMovieProjector;
 import com.ceiba.seats.puerto.repositorio.RepositorioSeat;
-import com.ceiba.seats.servicio.ServicioActualizarSeat;
 import com.ceiba.ticket.puerto.repositorio.RepositorioTicket;
 import com.ceiba.ticket.servicio.ServicioActualizarTicket;
 import com.ceiba.ticket.servicio.ServicioCrearTicket;
@@ -23,24 +21,19 @@ public class BeanServicio {
         return new ServicioCrearUsuario(repositorioUsuario);
     }
 
-    @Bean
-    public ServicioConsultaMovieProjector servicioConsultaMovieProjector(MovieProjectorRepositorio movieProjectorRepositorio){
-        return new ServicioConsultaMovieProjector(movieProjectorRepositorio);
-    }
 
     @Bean
-    public ServicioEliminarTicket servicioEliminarTicket(RepositorioTicket repositorioTicket){
-        return new ServicioEliminarTicket(repositorioTicket);
+    public ServicioEliminarTicket servicioEliminarTicket(RepositorioTicket repositorioTicket,
+                                                         MovieProjectorRepositorio movieProjectorRepositorio,
+                                                         RepositorioSeat repositorioSeat){
+        return new ServicioEliminarTicket(repositorioTicket,movieProjectorRepositorio,repositorioSeat);
 
     }
     @Bean
-    public ServicioActualizarTicket servicioActualizarTicket(RepositorioTicket repositorioTicket){
-        return new ServicioActualizarTicket(repositorioTicket);
-    }
-
-    @Bean
-    public ServicioActualizarSeat servicioActualizarSeat(RepositorioSeat repositorioSeat){
-        return new ServicioActualizarSeat(repositorioSeat);
+    public ServicioActualizarTicket servicioActualizarTicket(RepositorioTicket repositorioTicket,
+                                                             RepositorioSeat repositorioSeat,
+                                                             MovieProjectorRepositorio movieProjectorRepositorio){
+        return new ServicioActualizarTicket(repositorioTicket,repositorioSeat,movieProjectorRepositorio);
     }
 
     @Bean
@@ -54,8 +47,9 @@ public class BeanServicio {
     }
 
     @Bean
-    public ServicioCrearTicket servicioCrearTicket(RepositorioTicket repositorioTicket){
-        return new ServicioCrearTicket(repositorioTicket);
+    public ServicioCrearTicket servicioCrearTicket(RepositorioTicket repositorioTicket,RepositorioSeat repositorioSeat,
+                                                   MovieProjectorRepositorio movieProjectorRepositorio){
+        return new ServicioCrearTicket(repositorioTicket,repositorioSeat,movieProjectorRepositorio);
     }
 	
 

@@ -17,7 +17,7 @@ public class TicketTestDataBuilder {
     }
 
     public Ticket build(){
-        return new Ticket(idTicket,idClient,amount,idMovieProjector);
+        return new Ticket(idClient,amount,idMovieProjector);
     }
 
 }

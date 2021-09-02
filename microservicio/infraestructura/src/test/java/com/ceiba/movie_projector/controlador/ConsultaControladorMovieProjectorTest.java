@@ -1,8 +1,6 @@
-package com.ceiba.movie.controlador;
+package com.ceiba.movie_projector.controlador;
 
 import com.ceiba.ApplicationMock;
-import com.ceiba.usuario.controlador.ConsultaControladorUsuario;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,20 +18,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes= ApplicationMock.class)
-@WebMvcTest(ConsultaControladorMovie.class)
-public class ConsultaControladorMovieTest {
+@WebMvcTest(ConsultaControladorMovieProjectorTest.class)
+public class ConsultaControladorMovieProjectorTest {
+
 
     @Autowired
     private MockMvc mocMvc;
 
     @Test
-    public void listar() throws Exception {
-        mocMvc.perform(get("/movies")
+    public void listarMovieProjectorTest() throws Exception {
+        mocMvc.perform(get("/movieprojector")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[0].id", is(1)));
-
     }
-
 }
