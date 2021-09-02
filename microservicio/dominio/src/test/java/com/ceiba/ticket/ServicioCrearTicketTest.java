@@ -3,7 +3,6 @@ package com.ceiba.ticket;
 import com.ceiba.BasePrueba;
 import com.ceiba.movie_projector.exception.ExcepcionTiempoProyeccion;
 import com.ceiba.movie_projector.puerto.repositorio.MovieProjectorRepositorio;
-import com.ceiba.seats.excepcion.ExcepcionCantidad;
 import com.ceiba.seats.excepcion.ExcepcionDisponibilidad;
 import com.ceiba.seats.excepcion.ExcepcionExistencia;
 import com.ceiba.seats.puerto.repositorio.RepositorioSeat;
@@ -90,6 +89,17 @@ public class ServicioCrearTicketTest {
         MovieProjectorRepositorio movieProjectorRepositorio = Mockito.mock(MovieProjectorRepositorio.class);
         ServicioCrearTicket servicioCrearTicket = new ServicioCrearTicket(repositorioTicket,repositorioSeat,movieProjectorRepositorio);
         BasePrueba.assertThrows(()->servicioCrearTicket.purchaseEnabled(date,sixThirty), ExcepcionTiempoProyeccion.class,"error reserva antes de una hora");
+
+
+    }
+
+    @Test
+    public void purchaseEnabledHoursTestSuccesful(){
+        LocalDate date = LocalDate.now().plusDays(1);
+        LocalTime sixThirty = LocalTime.now().minus(Duration.ofMinutes(50));
+        ServicioCrearTicket servicioCrearTicket = Mockito.mock(ServicioCrearTicket.class);
+        servicioCrearTicket.purchaseEnabled(date,sixThirty);
+        Mockito.verify(servicioCrearTicket,Mockito.times(1)).purchaseEnabled(date,sixThirty);
 
 
     }
