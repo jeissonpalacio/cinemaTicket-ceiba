@@ -99,7 +99,7 @@ public class ServicioCrearTicketTest {
         LocalTime sixThirty = LocalTime.now().minus(Duration.ofMinutes(50));
         ServicioCrearTicket servicioCrearTicket = Mockito.mock(ServicioCrearTicket.class);
         servicioCrearTicket.purchaseEnabled(date,sixThirty);
-        Mockito.verify(servicioCrearTicket,Mockito.times(1)).purchaseEnabled(date,sixThirty);
+        Mockito.verify(servicioCrearTicket,Mockito.atLeastOnce()).purchaseEnabled(date,sixThirty);
 
 
     }

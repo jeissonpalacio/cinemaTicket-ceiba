@@ -3,7 +3,6 @@ package com.ceiba.ticket.servicio;
 import com.ceiba.movie_projector.exception.ExcepcionTiempoProyeccion;
 import com.ceiba.movie_projector.modelo.entidad.MovieProjector;
 import com.ceiba.movie_projector.puerto.repositorio.MovieProjectorRepositorio;
-import com.ceiba.seats.excepcion.ExcepcionCantidad;
 import com.ceiba.seats.excepcion.ExcepcionDisponibilidad;
 import com.ceiba.seats.excepcion.ExcepcionExistencia;
 import com.ceiba.seats.puerto.repositorio.RepositorioSeat;
