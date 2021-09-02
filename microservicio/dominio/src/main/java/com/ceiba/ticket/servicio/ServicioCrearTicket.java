@@ -54,10 +54,8 @@ public class ServicioCrearTicket {
         final long days = ChronoUnit.DAYS.between(LocalDate.now(), date);
         if(days<0){
             throw new ExcepcionTiempoProyeccion(ERROR_DE_TIEMPO);
-        }else if(days==0){
-            if(duration.toMinutes()<=60){
+        }else if(days==0 && duration.toMinutes()<=60){
                 throw new ExcepcionTiempoProyeccion(NO_SE_PUEDE_HACER_UNA_HORA_ANTES);
-            }
         }
     }
 

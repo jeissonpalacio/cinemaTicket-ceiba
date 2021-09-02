@@ -51,10 +51,9 @@ public class ServicioCrearTicketTest {
         MovieProjectorRepositorio movieProjectorRepositorio = Mockito.mock(MovieProjectorRepositorio.class);
 
         Mockito.when(repositorioSeat.consultavailable(Mockito.anyInt())).thenReturn(1L);
-        ServicioCrearTicket servicioCrearTicket = Mockito.mock(ServicioCrearTicket.class);
+        ServicioCrearTicket servicioCrearTicket = new ServicioCrearTicket(repositorioTicket,repositorioSeat,movieProjectorRepositorio);
         servicioCrearTicket.validarDisponibilidad(1);
-        Mockito.verify(servicioCrearTicket).validarDisponibilidad(1);
-
+        Mockito.verify(repositorioSeat,Mockito.atLeastOnce()).consultavailable(1);
     }
 
 
