@@ -95,11 +95,11 @@ public class ServicioCrearTicketTest {
 
     @Test
     public void purchaseEnabledHoursTestSuccesful(){
-        LocalDate date = LocalDate.now().plusDays(1);
+        LocalDate date = LocalDate.now().plusDays(2);
         LocalTime sixThirty = LocalTime.now().minus(Duration.ofMinutes(50));
         ServicioCrearTicket servicioCrearTicket = Mockito.mock(ServicioCrearTicket.class);
         servicioCrearTicket.purchaseEnabled(date,sixThirty);
-        Mockito.verify(servicioCrearTicket,Mockito.atLeastOnce()).purchaseEnabled(date,sixThirty);
+        Mockito.verify(servicioCrearTicket,Mockito.atLeast(1)).purchaseEnabled(date,sixThirty);
 
 
     }
