@@ -9,7 +9,10 @@ import com.ceiba.ticket.modelo.entidad.Ticket;
 import com.ceiba.ticket.puerto.repositorio.RepositorioTicket;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 
 public class ServicioEliminarTicket {
     private final RepositorioTicket repositorioTicket;
@@ -34,20 +37,20 @@ public class ServicioEliminarTicket {
             throw new ExcepcionExistenciaTicket(NO_EXISTE_EL_TICKET);
         }
     }
-    // Esta logica se coloca en otro servicio ServicioValidaciones o se conserva porque puede ser logicas diferentes
-    public void validateTimeLimit(LocalDate time){
-        Period period = Period.between(LocalDate.now(),time);
-        if(period.getDays()<1){
+    public void validateTimeLimit(LocalDate date,LocalTime time){
+        LocalDate localDate = LocalDate.now();
+        LocalDateTime localDateTime = localDate.atTime(LocalTime.now());
+        LocalDateTime localDateProjection = date.atTime(time);
+        final long days = ChronoUnit.DAYS.between(localDateTime, localDateProjection);
+        if(days<1){
             throw  new ExcepcionTiempoDeCambio(EL_TIEMPO_DE_CAMBIO_PASO);
         }
     }
 
     public void eliminarTicket(Long id){
-        // quitar de seats el id, porque es una relacion de ticket - seats
         Ticket ticket = obtenerTicket(id);
         MovieProjector movieProjector = this.movieProjectorRepositorio.findbyMovieProjectorForId(ticket.getIdMovieProjector());
-        validateTimeLimit(movieProjector.getMovieProjection());
-        // con este id hacer el update en seat
+        validateTimeLimit(movieProjector.getMovieProjection(),movieProjector.getHourMovie());
         this.repositorioSeat.actualizarSeatAvailable(id,null,1);
         this.repositorioTicket.eliminarTicket(id);
     }
