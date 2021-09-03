@@ -30,7 +30,6 @@ public class ComandoControladorTicket {
     @PostMapping
     @ApiOperation("Crear ticket")
     public ComandoRespuesta<Long> crearTicket(@RequestBody ComandoTicket comandoTicket){
-        System.out.println("Comando" + comandoTicket.getIdSeats());
         return this.manejadorCrearTicket.ejecutar(comandoTicket);
     }
 
