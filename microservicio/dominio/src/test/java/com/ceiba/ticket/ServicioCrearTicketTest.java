@@ -94,7 +94,7 @@ public class ServicioCrearTicketTest {
     }
 
     @Test
-    public void purchaseEnabledHoursTestSuccesful(){
+    public void purchaseEnabledHoursSuccesfuTest(){
         LocalDate date = LocalDate.now().plusDays(2);
         LocalTime sixThirty = LocalTime.now().minus(Duration.ofMinutes(50));
         RepositorioTicket repositorioTicket = Mockito.mock(RepositorioTicket.class);
@@ -108,6 +108,38 @@ public class ServicioCrearTicketTest {
 
 
     }
+    @Test
+    public void purchaseEnabledHoursMenorSuccesfulDaysTest(){
+        LocalDate date = LocalDate.now();
+        LocalTime sixThirty = LocalTime.now().plusHours(2);
+        RepositorioTicket repositorioTicket = Mockito.mock(RepositorioTicket.class);
+        RepositorioSeat repositorioSeat = Mockito.mock(RepositorioSeat.class);
+        MovieProjectorRepositorio movieProjectorRepositorio = Mockito.mock(MovieProjectorRepositorio.class);
+        ServicioCrearTicket servicioCrearTickets = new ServicioCrearTicket(repositorioTicket,repositorioSeat,movieProjectorRepositorio);
+        ServicioCrearTicket servicioCrearTicket = Mockito.spy(servicioCrearTickets);
+        servicioCrearTicket.purchaseEnabled(date,sixThirty);
+        Mockito.verify(servicioCrearTicket).purchaseEnabled(date,sixThirty);
+
+
+
+    }
+    @Test
+    public void purchaseEnabledHoursSuccesfulDaysTest(){
+        LocalDate date = LocalDate.now().plusDays(1);
+        LocalTime sixThirty = LocalTime.now().minus(Duration.ofMinutes(70));
+        RepositorioTicket repositorioTicket = Mockito.mock(RepositorioTicket.class);
+        RepositorioSeat repositorioSeat = Mockito.mock(RepositorioSeat.class);
+        MovieProjectorRepositorio movieProjectorRepositorio = Mockito.mock(MovieProjectorRepositorio.class);
+        ServicioCrearTicket servicioCrearTickets = new ServicioCrearTicket(repositorioTicket,repositorioSeat,movieProjectorRepositorio);
+        ServicioCrearTicket servicioCrearTicket = Mockito.spy(servicioCrearTickets);
+        servicioCrearTicket.purchaseEnabled(date,sixThirty);
+        Mockito.verify(servicioCrearTicket).purchaseEnabled(date,sixThirty);
+
+
+
+    }
+
+
     @Test
     public void calculateHalfPriceTest(){
         LocalDate date = LocalDate.of(2021, 9, 2);
