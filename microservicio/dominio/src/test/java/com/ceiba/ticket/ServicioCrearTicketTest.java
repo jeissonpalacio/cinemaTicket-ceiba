@@ -97,9 +97,14 @@ public class ServicioCrearTicketTest {
     public void purchaseEnabledHoursTestSuccesful(){
         LocalDate date = LocalDate.now().plusDays(2);
         LocalTime sixThirty = LocalTime.now().minus(Duration.ofMinutes(50));
-        ServicioCrearTicket servicioCrearTicket = Mockito.mock(ServicioCrearTicket.class);
+        RepositorioTicket repositorioTicket = Mockito.mock(RepositorioTicket.class);
+        RepositorioSeat repositorioSeat = Mockito.mock(RepositorioSeat.class);
+        MovieProjectorRepositorio movieProjectorRepositorio = Mockito.mock(MovieProjectorRepositorio.class);
+        ServicioCrearTicket servicioCrearTickets = new ServicioCrearTicket(repositorioTicket,repositorioSeat,movieProjectorRepositorio);
+        ServicioCrearTicket servicioCrearTicket = Mockito.spy(servicioCrearTickets);
         servicioCrearTicket.purchaseEnabled(date,sixThirty);
-        Mockito.verify(servicioCrearTicket,Mockito.atLeast(1)).purchaseEnabled(date,sixThirty);
+        Mockito.verify(servicioCrearTicket).purchaseEnabled(date,sixThirty);
+
 
 
     }
