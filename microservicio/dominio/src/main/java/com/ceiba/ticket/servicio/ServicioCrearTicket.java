@@ -9,10 +9,7 @@ import com.ceiba.seats.puerto.repositorio.RepositorioSeat;
 import com.ceiba.ticket.modelo.entidad.Ticket;
 import com.ceiba.ticket.puerto.repositorio.RepositorioTicket;
 
-import java.time.DayOfWeek;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.*;
 import java.time.temporal.ChronoUnit;
 
 public class ServicioCrearTicket {
@@ -47,13 +44,15 @@ public class ServicioCrearTicket {
         }
     }
     public void purchaseEnabled(LocalDate date, LocalTime time){
-
-        LocalTime timeLocal = LocalTime.now();
-        Duration duration = Duration.between(timeLocal,time);
-        final long days = ChronoUnit.DAYS.between(LocalDate.now(), date);
-        if(days<0){
+        LocalDate localDate = LocalDate.now();
+        LocalDateTime localDateTime = localDate.atTime(LocalTime.now());
+        LocalDateTime localDateProjection = date.atTime(time);
+        long minutes = ChronoUnit.MINUTES.between(localDateTime, localDateProjection);
+        final long days = ChronoUnit.DAYS.between(localDate,localDateProjection);
+        if(localDateTime.isAfter(localDateProjection)){
             throw new ExcepcionTiempoProyeccion(ERROR_DE_TIEMPO);
-        }else if(days==0 && duration.toMinutes()<=60){
+
+        }else if(days==0 && minutes<=60){
                 throw new ExcepcionTiempoProyeccion(NO_SE_PUEDE_HACER_UNA_HORA_ANTES);
         }
     }
