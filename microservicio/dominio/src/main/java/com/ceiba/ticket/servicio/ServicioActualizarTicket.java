@@ -2,7 +2,6 @@ package com.ceiba.ticket.servicio;
 
 import com.ceiba.movie_projector.modelo.entidad.MovieProjector;
 import com.ceiba.movie_projector.puerto.repositorio.MovieProjectorRepositorio;
-import com.ceiba.seats.excepcion.ExcepcionCantidad;
 import com.ceiba.seats.excepcion.ExcepcionDisponibilidad;
 import com.ceiba.seats.excepcion.ExcepcionExistencia;
 import com.ceiba.seats.puerto.repositorio.RepositorioSeat;
@@ -12,8 +11,9 @@ import com.ceiba.ticket.modelo.entidad.Ticket;
 import com.ceiba.ticket.puerto.repositorio.RepositorioTicket;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
-import java.util.List;
 
 public class ServicioActualizarTicket {
 
@@ -34,8 +34,11 @@ public class ServicioActualizarTicket {
         this.movieProjectorRepositorio = movieProjectorRepositorio;
 
     }
-    public void validateTimeLimit(LocalDate time){
-        final long days = ChronoUnit.DAYS.between(LocalDate.now(), time);
+    public void validateTimeLimit(LocalDate date,LocalTime time){
+        LocalDate localDate = LocalDate.now();
+        LocalDateTime localDateTime = localDate.atTime(LocalTime.now());
+        LocalDateTime localDateProjection = date.atTime(time);
+        final long days = ChronoUnit.DAYS.between(localDateTime, localDateProjection);
         if(days<1){
             throw  new ExcepcionTiempoDeCambio(EL_TIEMPO_DE_CAMBIO_PASO);
         }
@@ -67,7 +70,7 @@ public class ServicioActualizarTicket {
             validarDisponibilidad(value);
         });
         MovieProjector movieProjector = this.movieProjectorRepositorio.findbyMovieProjectorForId(ticket.getIdMovieProjector());
-        validateTimeLimit(movieProjector.getMovieProjection());
+        validateTimeLimit(movieProjector.getMovieProjection(),movieProjector.getHourMovie());
 
         this.repositorioSeat.actualizarSeatAvailable(ticket.getIdTicket(),null,1);
         ticket.getIdSeats().forEach(value ->{

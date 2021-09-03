@@ -75,9 +75,7 @@ public class ServicioCrearTicket {
         purchaseEnabled(movieProjector.getMovieProjection(),movieProjector.getHourMovie());
         ticket.setAmount(calculateHalfPrice(movieProjector.getMovieProjection(),ticket.getAmount()));
         Long id = this.repositorioTicket.crearTicket(ticket);
-        ticket.getIdSeats().forEach(value ->{
-            repositorioSeat.actualizarSeat(value,id,0);
-        });
+        ticket.getIdSeats().forEach(value -> repositorioSeat.actualizarSeat(value,id,0));
         return id;
     }
 }
