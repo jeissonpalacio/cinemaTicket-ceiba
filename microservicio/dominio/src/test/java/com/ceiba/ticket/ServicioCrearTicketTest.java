@@ -160,4 +160,15 @@ public class ServicioCrearTicketTest {
         Double result = 7500.00;
         Assert.assertEquals(servicioCrearTicket.calculateHalfPrice(date,15000.00),result);
     }
+    @Test
+    public void calculateHalfPriceDifferentDayTest(){
+        LocalDate date = LocalDate.of(2021, 9, 3);
+        RepositorioTicket repositorioTicket = Mockito.mock(RepositorioTicket.class);
+        RepositorioSeat repositorioSeat = Mockito.mock(RepositorioSeat.class);
+        MovieProjectorRepositorio movieProjectorRepositorio = Mockito.mock(MovieProjectorRepositorio.class);
+        ServicioCrearTicket servicioCrearTicket = new ServicioCrearTicket(repositorioTicket,repositorioSeat,movieProjectorRepositorio);
+        Double result = 15000.00;
+        Assert.assertEquals(servicioCrearTicket.calculateHalfPrice(date,15000.00),result);
+    }
+
 }
