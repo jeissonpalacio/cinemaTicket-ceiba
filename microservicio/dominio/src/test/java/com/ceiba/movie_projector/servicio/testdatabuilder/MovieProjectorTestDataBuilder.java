@@ -15,7 +15,7 @@ public class MovieProjectorTestDataBuilder {
 
     public MovieProjectorTestDataBuilder(){
         idMovieProjector = 1;
-        movieProjection = LocalDate.of(2021,8,31);
+        movieProjection = LocalDate.now().plusDays(2);
         hourMovie = LocalTime.of(13,30,00) ;
         idMovie = 1;
         idCinema = 1;

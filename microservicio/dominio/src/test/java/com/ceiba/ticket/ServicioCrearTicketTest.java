@@ -3,11 +3,14 @@ package com.ceiba.ticket;
 import com.ceiba.BasePrueba;
 import com.ceiba.movie_projector.exception.ExcepcionTiempoProyeccion;
 import com.ceiba.movie_projector.puerto.repositorio.MovieProjectorRepositorio;
+import com.ceiba.movie_projector.servicio.testdatabuilder.MovieProjectorTestDataBuilder;
 import com.ceiba.seats.excepcion.ExcepcionDisponibilidad;
 import com.ceiba.seats.excepcion.ExcepcionExistencia;
 import com.ceiba.seats.puerto.repositorio.RepositorioSeat;
+import com.ceiba.ticket.modelo.entidad.Ticket;
 import com.ceiba.ticket.puerto.repositorio.RepositorioTicket;
 import com.ceiba.ticket.servicio.ServicioCrearTicket;
+import com.ceiba.ticket.testdatabuilder.TicketTestDataBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -169,6 +172,22 @@ public class ServicioCrearTicketTest {
         ServicioCrearTicket servicioCrearTicket = new ServicioCrearTicket(repositorioTicket,repositorioSeat,movieProjectorRepositorio);
         Double result = 15000.00;
         Assert.assertEquals(servicioCrearTicket.calculateHalfPrice(date,15000.00),result);
+    }
+
+    @Test
+    public void crearServicioTicketTest(){
+        RepositorioTicket repositorioTicket = Mockito.mock(RepositorioTicket.class);
+        RepositorioSeat repositorioSeat = Mockito.mock(RepositorioSeat.class);
+        MovieProjectorRepositorio movieProjectorRepositorio = Mockito.mock(MovieProjectorRepositorio.class);
+        ServicioCrearTicket servicioCrearTicket = new ServicioCrearTicket(repositorioTicket,repositorioSeat,movieProjectorRepositorio);
+        Mockito.when(repositorioSeat.validarSeat(Mockito.anyInt())).thenReturn(true);
+        Mockito.when(repositorioSeat.consultavailable(Mockito.anyInt())).thenReturn(1L);
+        Mockito.when(movieProjectorRepositorio.findbyMovieProjectorForId(Mockito.anyInt())).thenReturn(new MovieProjectorTestDataBuilder().build());
+        Mockito.when(repositorioTicket.crearTicket(Mockito.any())).thenReturn(1L);
+        Ticket ticket = new TicketTestDataBuilder().build();
+        Long resp = 1L;
+        Assert.assertEquals(servicioCrearTicket.crearServicioTicket(ticket),resp);
+
     }
 
 }

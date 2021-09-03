@@ -72,12 +72,7 @@ public class ServicioCrearTicket {
             validarExistenciaSeat(e);
             validarDisponibilidad(e);
         });
-        // puede ir aqui sin tener que crear un metodo de que retorne un movieProjector
         MovieProjector movieProjector = this.movieProjectorRepositorio.findbyMovieProjectorForId(ticket.getIdMovieProjector());
-
-
-        // Este metodo debe de ser llamado desde ticket porque no contiene acceso a datos o se queda en el servicio
-        // Al igual que los metodos calculateHalfPrice
         purchaseEnabled(movieProjector.getMovieProjection(),movieProjector.getHourMovie());
         ticket.setAmount(calculateHalfPrice(movieProjector.getMovieProjection(),ticket.getAmount()));
         Long id = this.repositorioTicket.crearTicket(ticket);
