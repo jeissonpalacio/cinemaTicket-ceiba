@@ -2,14 +2,17 @@ package com.ceiba.ticket;
 
 import com.ceiba.BasePrueba;
 import com.ceiba.movie_projector.puerto.repositorio.MovieProjectorRepositorio;
+import com.ceiba.movie_projector.servicio.testdatabuilder.MovieProjectorTestDataBuilder;
 import com.ceiba.seats.excepcion.ExcepcionCantidad;
 import com.ceiba.seats.excepcion.ExcepcionDisponibilidad;
 import com.ceiba.seats.excepcion.ExcepcionExistencia;
 import com.ceiba.seats.puerto.repositorio.RepositorioSeat;
 import com.ceiba.ticket.excepcion.ExcepcionExistenciaTicket;
 import com.ceiba.ticket.excepcion.ExcepcionTiempoDeCambio;
+import com.ceiba.ticket.modelo.entidad.Ticket;
 import com.ceiba.ticket.puerto.repositorio.RepositorioTicket;
 import com.ceiba.ticket.servicio.ServicioActualizarTicket;
+import com.ceiba.ticket.testdatabuilder.TicketTestDataBuilder;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -100,6 +103,38 @@ public class ServicioActualizarTicketTest {
         ServicioActualizarTicket servicioActualizarTicketSpy = Mockito.spy(servicioActualizarTicket);
         servicioActualizarTicketSpy.validateExist(1L);
         Mockito.verify(servicioActualizarTicketSpy).validateExist(1L);
+
+    }
+    @Test
+    public void validarExistenciaSeatSuccesfulTest(){
+        RepositorioSeat repositorioSeat = Mockito.mock(RepositorioSeat.class);
+        RepositorioTicket repositorioTicket = Mockito.mock(RepositorioTicket.class);
+        MovieProjectorRepositorio movieProjectorRepositorio = Mockito.mock(MovieProjectorRepositorio.class);
+        Mockito.when(repositorioSeat.validarSeat(Mockito.anyInt())).thenReturn(true);
+        ServicioActualizarTicket servicioActualizarTicket = new ServicioActualizarTicket(repositorioTicket,repositorioSeat,movieProjectorRepositorio);
+        ServicioActualizarTicket servicioActualizarTicketSpy = Mockito.spy(servicioActualizarTicket);
+        servicioActualizarTicketSpy.validarExistenciaSeat(1);
+        Mockito.verify(servicioActualizarTicketSpy).validarExistenciaSeat(1);
+    }
+
+
+    @Test
+    public void actualizarTicket(){
+        LocalDate time = LocalDate.now().plusDays(2);
+        LocalTime localTime = LocalTime.now();
+        LocalDateTime localDateTime = time.atTime(localTime);
+        Ticket ticket = new TicketTestDataBuilder().build();
+
+        RepositorioSeat repositorioSeat = Mockito.mock(RepositorioSeat.class);
+        RepositorioTicket repositorioTicket = Mockito.mock(RepositorioTicket.class);
+        MovieProjectorRepositorio movieProjectorRepositorio = Mockito.mock(MovieProjectorRepositorio.class);
+        Mockito.when(repositorioSeat.validarSeat(Mockito.anyInt())).thenReturn(true);
+        Mockito.when(repositorioTicket.validarExiste(Mockito.any())).thenReturn(true);
+        Mockito.when(movieProjectorRepositorio.findbyMovieProjectorForId(Mockito.any())).thenReturn(new MovieProjectorTestDataBuilder().conMovieProjection(localDateTime.toLocalDate()).conHourMovie(localDateTime.toLocalTime()).build());
+        Mockito.when(repositorioSeat.consultavailable(Mockito.anyInt())).thenReturn(1L);
+        ServicioActualizarTicket servicioActualizarTicket = new ServicioActualizarTicket(repositorioTicket,repositorioSeat,movieProjectorRepositorio);
+
+        servicioActualizarTicket.actualizarTicket(ticket);
 
     }
 }

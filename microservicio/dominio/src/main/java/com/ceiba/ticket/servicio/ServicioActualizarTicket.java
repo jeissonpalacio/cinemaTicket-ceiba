@@ -73,9 +73,7 @@ public class ServicioActualizarTicket {
         validateTimeLimit(movieProjector.getMovieProjection(),movieProjector.getHourMovie());
 
         this.repositorioSeat.actualizarSeatAvailable(ticket.getIdTicket(),null,1);
-        ticket.getIdSeats().forEach(value ->{
-            repositorioSeat.actualizarSeat(value,ticket.getIdTicket(),0);
-        });
+        ticket.getIdSeats().forEach(value ->repositorioSeat.actualizarSeat(value,ticket.getIdTicket(),0));
         repositorioTicket.cambiarProyeccionTicket(ticket);
     }
 
