@@ -66,3 +66,12 @@ los valores devuelto .Se esperaria aumentar el tiempo cada vez que un bloque se 
 
 *Cualquier duda o aporte con este bloque contactar a juan.botero@ceiba.com.co o juan.castano@ceiba.com.co*
 Hash de git relacionado: aa90e55b
+
+
+
+API 
+
+Cinema - Check - Realizar prueba de integracion 
+Movie - Check  - Realizar prueba de integracion 
+Movie Projector - Check - Realizar prueba de integracion
+Seats - Check - Realizar prueba de integracion 

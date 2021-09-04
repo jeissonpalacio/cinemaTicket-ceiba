@@ -17,6 +17,7 @@ public class ComandoControladorTicket {
     private final ManejadorCrearTicket manejadorCrearTicket;
     private final ManejadorEliminarTicket manejadorEliminarTicket;
     private final ManejadorActualizarTicket manejadorActualizarTicket;
+
     @Autowired
     public ComandoControladorTicket(ManejadorCrearTicket manejadorCrearTicket,
                                     ManejadorEliminarTicket manejadorEliminarTicket,
