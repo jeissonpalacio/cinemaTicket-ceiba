@@ -1,0 +1,1 @@
+select id_seats,number_seat,available,id_ticket from seats where id_movie_projector = :id

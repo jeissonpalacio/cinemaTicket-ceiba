@@ -12,15 +12,27 @@ import com.ceiba.usuario.servicio.ServicioCrearUsuario;
 import com.ceiba.usuario.servicio.ServicioEliminarUsuario;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class BeanServicio {
+
+    // Otra opcion?
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**").allowedOrigins("http://localhost:4200");
+            }
+        };
+    }
 
     @Bean
     public ServicioCrearUsuario servicioCrearUsuario(RepositorioUsuario repositorioUsuario) {
         return new ServicioCrearUsuario(repositorioUsuario);
     }
-
 
     @Bean
     public ServicioEliminarTicket servicioEliminarTicket(RepositorioTicket repositorioTicket,

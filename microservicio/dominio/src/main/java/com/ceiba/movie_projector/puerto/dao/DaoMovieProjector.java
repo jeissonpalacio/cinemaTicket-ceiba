@@ -7,4 +7,5 @@ import java.util.List;
 public interface DaoMovieProjector {
 
     List<DtoMovieProjector> listMovieProjector();
+    List<DtoMovieProjector> listMovieProjectorByIdMovie(Long id);
 }

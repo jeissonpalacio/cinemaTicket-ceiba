@@ -7,4 +7,5 @@ import java.util.List;
 public interface DaoSeats {
 
     List<DtoSeats> listSeats();
+    List<DtoSeats> listSeatsByIdMovieProjector(Long id);
 }

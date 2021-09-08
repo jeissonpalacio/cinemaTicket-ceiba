@@ -18,4 +18,8 @@ public class ManejadorListarMovieProjector {
     public List<DtoMovieProjector> ejecutarListarMovieProjector(){
         return this.daoMovieProjector.listMovieProjector();
     }
+
+    public List<DtoMovieProjector> listMovieProjectorByIdMovie(Long id){
+        return this.daoMovieProjector.listMovieProjectorByIdMovie(id);
+    }
 }

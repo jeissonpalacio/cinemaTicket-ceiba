@@ -1,19 +1,23 @@
 package com.ceiba.ticket.consulta;
 
-import com.ceiba.seats.modelo.dto.DtoSeats;
-import com.ceiba.seats.puerto.dao.DaoSeats;
+
+import com.ceiba.ticket.modelo.dto.DtoTicket;
+import com.ceiba.ticket.puerto.dao.DaoTicket;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class ManejadorListarTicket {
 
-    private final DaoSeats daoSeats;
 
-    public ManejadorListarTicket(DaoSeats daoSeats) {
-        this.daoSeats = daoSeats;
+    private final DaoTicket daoTicket;
+
+    public ManejadorListarTicket(DaoTicket daoTicket) {
+        this.daoTicket = daoTicket;
     }
 
-    public List<DtoSeats> listarSeats(){
-        return this.daoSeats.listSeats();
+    public List<DtoTicket> ejecutar(){
+        return this.daoTicket.listarTicket();
     }
 }

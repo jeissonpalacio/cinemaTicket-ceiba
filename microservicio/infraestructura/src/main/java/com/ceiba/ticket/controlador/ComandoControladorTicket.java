@@ -27,7 +27,6 @@ public class ComandoControladorTicket {
         this.manejadorEliminarTicket = manejadorEliminarTicket;
         this.manejadorActualizarTicket = manejadorActualizarTicket;
     }
-
     @PostMapping
     @ApiOperation("Crear ticket")
     public ComandoRespuesta<Long> crearTicket(@RequestBody ComandoTicket comandoTicket){

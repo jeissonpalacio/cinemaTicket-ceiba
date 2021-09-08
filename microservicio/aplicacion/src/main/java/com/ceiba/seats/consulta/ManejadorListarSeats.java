@@ -19,5 +19,9 @@ public class ManejadorListarSeats {
     public List<DtoSeats> ejecutarListarSeats(){
         return this.daoSeats.listSeats();
     }
+
+    public List<DtoSeats> listarSeatById(Long id){
+        return  this.daoSeats.listSeatsByIdMovieProjector(id);
+    }
 }
 
