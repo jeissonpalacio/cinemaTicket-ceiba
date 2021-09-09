@@ -34,22 +34,18 @@ export class CreateTicketComponent implements OnInit {
     if(Object.keys(this.activatedRoute.snapshot.params).length===0){
       this.router.navigate(['/movie/listar'],{skipLocationChange:true});
     }
-
     this.movie = JSON.parse(this.activatedRoute.snapshot.params.movie);
     this.movieProjectorService.consultar(this.movie).subscribe((movieProjectorData)=>{
         this.movieProjector = movieProjectorData;
-    })
+      })
    
     this.construirFormulario();
   }
 
   onSeats(movieProjector:MovieProjector){
-      console.log(movieProjector);
       this.currentProjection = movieProjector;
-      console.log(movieProjector);
       this.seatService.consultar(this.currentProjection).subscribe((data)=>{
         this.seat= data;
-        console.log(data);
       })
 
   }
@@ -70,7 +66,6 @@ export class CreateTicketComponent implements OnInit {
   }
 
   crear(){
-    console.log(this.ticketForm.value);
     let amount = this.seatTicket.length*15000.00;
     let tickets = this.seatTicket.map(value =>{
       return value.id;

@@ -7,6 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 
 import { ListarMovieComponent } from './listar-movie.component';
+import { HttpService } from '@core/services/http.service';
 
 describe('ListarMovieComponent', () => {
   let component: ListarMovieComponent;
@@ -20,7 +21,7 @@ describe('ListarMovieComponent', () => {
         CommonModule,
         HttpClientModule,
         RouterTestingModule],
-      providers:[MovieService]
+      providers:[MovieService,HttpService]
     })
     .compileComponents();
   });
