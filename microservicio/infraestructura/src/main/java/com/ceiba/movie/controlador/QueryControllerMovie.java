@@ -29,6 +29,6 @@ public class QueryControllerMovie {
     @ApiOperation("Listar peliculas")
     public List<DtoMovie> listar(){
         return this.handlerListMovies.executeList();
-    };
+    }
 
 }

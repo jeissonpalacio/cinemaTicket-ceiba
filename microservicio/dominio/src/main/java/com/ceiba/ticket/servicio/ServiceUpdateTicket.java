@@ -21,10 +21,9 @@ public class ServiceUpdateTicket {
     private final RepositorioSeat repositorioSeat;
     private final MovieProjectorRepository movieProjectorRepository;
     private static final String EL_TIEMPO_DE_CAMBIO_PASO= "El tiempo de cambio paso";
-    private static final String SOLO_PUEDE_TENER_DOS_ASIENTOS = "Solo puede tener dos asientos";
     private static final String NO_EXISTE_SEAT = "No existe el seat";
     private static final String LA_SILLA_ESTA_RESERVADA = "La silla esta siendo reservada";
-    private final String NO_EXISTE_EL_TICKET = "No existe el ticket";
+    private static final String NO_EXISTE_EL_TICKET = "No existe el ticket";
 
 
     public ServiceUpdateTicket(RepositorioTicket repositorioTicket, RepositorioSeat repositorioSeat,

@@ -76,6 +76,7 @@ public class ServiceCreateTicketTest {
 
     }
 
+
     @Test
     public void purchaseEnabledHoursTest(){
         LocalDate date = LocalDate.now();
@@ -91,6 +92,25 @@ public class ServiceCreateTicketTest {
         Mockito.when(repositorioSeat.consultavailable(Mockito.anyInt())).thenReturn(1L);
         Ticket ticket = new TicketTestDataBuilder().build();
         BasePrueba.assertThrows(()-> serviceCreateTicket.ejecutar(ticket), ExcepcionProjectionTime.class,"error reserva antes de una hora");
+
+
+    }
+
+    @Test
+    public void purchaseEnabledDayTest(){
+        LocalDate date = LocalDate.now();
+        LocalTime sixThirty = LocalTime.now().plusMinutes(70);
+        LocalDateTime localDate = date.atTime(sixThirty);
+        RepositorioTicket repositorioTicket = Mockito.mock(RepositorioTicket.class);
+        RepositorioSeat repositorioSeat = Mockito.mock(RepositorioSeat.class);
+        MovieProjectorRepository movieProjectorRepository = Mockito.mock(MovieProjectorRepository.class);
+        ServiceCalculateHalfPrice serviceCalculateHalfPrice = Mockito.mock(ServiceCalculateHalfPrice.class);
+        ServiceCreateTicket serviceCreateTicket = new ServiceCreateTicket(repositorioTicket,repositorioSeat, movieProjectorRepository,serviceCalculateHalfPrice);
+        Mockito.when(movieProjectorRepository.findbyMovieProjectorForId(Mockito.anyInt())).thenReturn(new MovieProjectorTestDataBuilder().conMovieProjection(localDate.toLocalDate()).conHourMovie(localDate.toLocalTime()).build());
+        Mockito.when(repositorioSeat.validateSeat(Mockito.anyInt())).thenReturn(true);
+        Mockito.when(repositorioSeat.consultavailable(Mockito.anyInt())).thenReturn(1L);
+        Ticket ticket = new TicketTestDataBuilder().build();
+        serviceCreateTicket.ejecutar(ticket);
 
 
     }

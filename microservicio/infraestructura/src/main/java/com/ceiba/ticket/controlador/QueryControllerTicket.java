@@ -36,7 +36,6 @@ public class QueryControllerTicket {
     @GetMapping(value = "/consultar-por-id-cliente/{id}")
     @ApiOperation("Obtener tickets por id client")
     public List<DtoTicket> getTicketForIdClient(@PathVariable Long id){
-        System.out.println(this.handlerListByIdClient.execute(id));
         return this.handlerListByIdClient.execute(id);
 
     }
