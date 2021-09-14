@@ -26,8 +26,8 @@ describe('ProjectorService', () => {
     expect(ticketService).toBeTruthy();
   });
 
-  it('deberia crear un producto', () => {
-    const ticket = new Ticket(1,15000.00,1,[1]);
+  it('deberia crear un ticket', () => {
+    const ticket = new Ticket(undefined,1,15000.00,1,[1]);
     service.crear(ticket).subscribe((respuesta)=>{
         console.log(respuesta);
         expect(respuesta).toEqual(true);

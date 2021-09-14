@@ -59,7 +59,7 @@ public class ServicioCrearTicket {
 
     public Double calculateHalfPrice(LocalDate date, double price){
         if(date.getDayOfWeek() == DayOfWeek.TUESDAY || DayOfWeek.THURSDAY == date.getDayOfWeek()){
-            price = price/2;
+            price = price/3;
         }
 
         return price;

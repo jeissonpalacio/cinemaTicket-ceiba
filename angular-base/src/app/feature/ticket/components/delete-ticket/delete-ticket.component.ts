@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
 import { Ticket } from './../../shared/model/ticket';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { TicketService } from '../../shared/service/ticket.service';
 
 @Component({
-  selector: 'app-ticket',
-  templateUrl: './ticket.component.html',
-  styleUrls: ['./ticket.component.css']
+  selector: 'app-delete-ticket',
+  templateUrl: './delete-ticket.component.html',
+  styleUrls: ['./delete-ticket.component.css']
 })
-export class TicketComponent implements OnInit {
-
+export class DeleteTicketComponent implements OnInit {
   ticketForm:FormGroup;
   tickets:Ticket[];
   alert: boolean=false;
@@ -53,5 +52,6 @@ export class TicketComponent implements OnInit {
   closeAlert(){
     this.alert=false;
   }
+
 
 }

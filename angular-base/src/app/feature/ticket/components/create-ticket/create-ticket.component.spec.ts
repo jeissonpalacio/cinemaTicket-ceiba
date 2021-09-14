@@ -15,7 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpService } from '@core/services/http.service';
 
 
-describe('CreateTicketComponent test', () => {
+describe('CreateTicketComponent', () => {
   let component: CreateTicketComponent;
   let fixture: ComponentFixture<CreateTicketComponent>;
   let movieProjectorService: MovieProjectorService;

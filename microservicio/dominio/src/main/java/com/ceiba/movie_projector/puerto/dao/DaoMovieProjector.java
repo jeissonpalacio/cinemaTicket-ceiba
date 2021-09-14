@@ -8,4 +8,5 @@ public interface DaoMovieProjector {
 
     List<DtoMovieProjector> listMovieProjector();
     List<DtoMovieProjector> listMovieProjectorByIdMovie(Long id);
+    DtoMovieProjector listMovieProjectoById(Long id);
 }

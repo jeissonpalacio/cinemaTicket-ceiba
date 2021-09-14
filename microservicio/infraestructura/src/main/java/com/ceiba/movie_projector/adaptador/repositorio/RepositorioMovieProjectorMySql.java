@@ -23,7 +23,7 @@ public class RepositorioMovieProjectorMySql implements MovieProjectorRepositorio
     @Override
     public MovieProjector findbyMovieProjectorForId(Integer idMovieProjector) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("idMovieProjector", idMovieProjector);
+        paramSource.addValue("id", idMovieProjector);
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlFindById,paramSource, new MapeoMovieProjectorModel());
     }
 }

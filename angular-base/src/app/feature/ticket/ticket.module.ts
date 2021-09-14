@@ -8,12 +8,18 @@ import { TicketComponent } from './components/ticket/ticket.component';
 import { CreateTicketComponent } from './components/create-ticket/create-ticket.component';
 import { SharedModule } from '@shared/shared.module';
 import { TicketService } from './shared/service/ticket.service';
+import { DeleteTicketComponent } from './components/delete-ticket/delete-ticket.component';
+import { ListarActualizarTicketComponent } from './components/listar-actualizar-ticket/listar-actualizar-ticket.component';
+import { ActualizarTicketComponent } from './components/actualizar-ticket/actualizar-ticket.component';
 
 
 @NgModule({
   declarations: [
     TicketComponent,
-    CreateTicketComponent
+    CreateTicketComponent,
+    DeleteTicketComponent,
+    ListarActualizarTicketComponent,
+    ActualizarTicketComponent
   ],
   imports: [
     SharedModule,

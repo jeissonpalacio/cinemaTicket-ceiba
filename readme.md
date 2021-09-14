@@ -75,3 +75,5 @@ Cinema - Check - Realizar prueba de integracion
 Movie - Check  - Realizar prueba de integracion 
 Movie Projector - Check - Realizar prueba de integracion
 Seats - Check - Realizar prueba de integracion 
+
+Cuando se hace un cambio este quita las sillas que tiene y se actualiza por las nuevas puede ser de diferente funcion pero la misma cantidad de sillas

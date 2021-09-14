@@ -19,7 +19,11 @@ public class DaoSeatsMysql implements DaoSeats {
     private static String sqlListarSeats;
 
     @SqlStatement(namespace = "seats", value = "consultbyidmovieprojector")
-    private static String sqlconsultByIdMovieProjector;
+    private static String sqlConsultByIdMovieProjector;
+
+
+    @SqlStatement(namespace = "seats",value = "getseatbyidticket")
+    private static String sqlGetSeatByIdTicket;
 
     public DaoSeatsMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate){
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
@@ -34,7 +38,14 @@ public class DaoSeatsMysql implements DaoSeats {
     public List<DtoSeats> listSeatsByIdMovieProjector(Long id) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("id",id);
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlconsultByIdMovieProjector,parameterSource,new MapeoSeats());
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlConsultByIdMovieProjector,parameterSource,new MapeoSeats());
+    }
+
+    @Override
+    public List<DtoSeats> listSeatsByIdTicket(Long id) {
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id",id);
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlGetSeatByIdTicket,parameterSource,new MapeoSeats());
     }
 
 

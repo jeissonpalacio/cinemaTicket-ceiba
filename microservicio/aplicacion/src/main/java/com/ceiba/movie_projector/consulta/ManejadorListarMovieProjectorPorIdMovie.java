@@ -7,15 +7,15 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class ManejadorListarMovieProjector {
+public class ManejadorListarMovieProjectorPorIdMovie {
 
-    DaoMovieProjector daoMovieProjector;
+    private DaoMovieProjector daoMovieProjector;
 
-    public ManejadorListarMovieProjector(DaoMovieProjector daoMovieProjector){
+    public ManejadorListarMovieProjectorPorIdMovie(DaoMovieProjector daoMovieProjector){
         this.daoMovieProjector = daoMovieProjector;
     }
 
-    public List<DtoMovieProjector> ejecutar(){
-        return this.daoMovieProjector.listMovieProjector();
+    public List<DtoMovieProjector> ejecutar(Long id){
+        return this.daoMovieProjector.listMovieProjectorByIdMovie(id);
     }
 }

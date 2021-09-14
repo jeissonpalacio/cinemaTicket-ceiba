@@ -7,4 +7,5 @@ import java.util.List;
 public interface DaoTicket {
 
     List<DtoTicket> listarTicket();
+    List<DtoTicket> getTicketForIdClient(Long id);
 }

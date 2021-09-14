@@ -21,7 +21,8 @@ public class DaoMovieProjectorMySql  implements DaoMovieProjector {
     @SqlStatement(namespace = "movie_projector",value = "listbyIdMovie")
     private static String sqlListMovieProjectorByIdMovie;
 
-
+    @SqlStatement(namespace = "movie_projector",value = "consult_movie_projector")
+    private static String getSqlconsultListarMovieProjector;
     public DaoMovieProjectorMySql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate){
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
     }
@@ -37,4 +38,13 @@ public class DaoMovieProjectorMySql  implements DaoMovieProjector {
         parameterSource.addValue("id",id);
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlListMovieProjectorByIdMovie,parameterSource,new MapeoMovieProjector());
     }
+    @Override
+    public DtoMovieProjector listMovieProjectoById(Long id) {
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id",id);
+
+        return  this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(getSqlconsultListarMovieProjector,parameterSource,new MapeoMovieProjector());
+    }
+
+
 }

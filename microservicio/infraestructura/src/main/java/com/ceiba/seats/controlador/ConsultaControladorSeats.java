@@ -1,5 +1,6 @@
 package com.ceiba.seats.controlador;
 
+import com.ceiba.seats.consulta.ManejadorListarSeatPorIdTicket;
 import com.ceiba.seats.consulta.ManejadorListarSeats;
 import com.ceiba.seats.modelo.dto.DtoSeats;
 import io.swagger.annotations.Api;
@@ -15,10 +16,12 @@ import java.util.List;
 public class ConsultaControladorSeats {
 
     private final ManejadorListarSeats manejadorListarSeats;
-
+    private final ManejadorListarSeatPorIdTicket manejadorListarSeatPorIdTicket;
     @Autowired
-    public ConsultaControladorSeats(ManejadorListarSeats manejadorListarSeats) {
+    public ConsultaControladorSeats(ManejadorListarSeats manejadorListarSeats,
+                                    ManejadorListarSeatPorIdTicket manejadorListarSeatPorIdTicket) {
         this.manejadorListarSeats = manejadorListarSeats;
+        this.manejadorListarSeatPorIdTicket = manejadorListarSeatPorIdTicket;
     }
 
     @GetMapping
@@ -32,6 +35,14 @@ public class ConsultaControladorSeats {
     @ApiOperation("Lista seats")
     public List<DtoSeats> consultseatbyid(@PathVariable Long id){
         return this.manejadorListarSeats.listarSeatById(id);
+    }
+
+    @GetMapping(value = "/consult-by-id-ticket/{id}")
+    @ApiOperation("Consultar por id del ticket")
+    public List<DtoSeats> consultarByIdTicket(@PathVariable Long id){
+
+        return manejadorListarSeatPorIdTicket.ejecutar(id);
+
     }
 
 

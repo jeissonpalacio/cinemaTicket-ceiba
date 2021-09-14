@@ -1,0 +1,58 @@
+<h1 *ngIf="!isAddMode">Edit Ticket</h1>
+
+<form [formGroup]="ticketForm">
+    <div class="form-row">
+        <div class="form-group col-5">
+            <label>Id del ticket</label>
+            <input type="text" formControlName="id" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+        </div>
+        <div class="form-group col-5">
+            <label>Id client</label>
+            <input type="text" formControlName="idClient" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+        </div>
+        <div class="form-group col-5">
+            <label>amount</label>
+            <input type="text" formControlName="amount" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+        </div>
+        <div class="form-group col-5">
+            <label>movieProjector</label>
+            <input type="text" formControlName="movieProjector" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+        </div>
+        <div class="form-group col-5">
+            <label>movieProjector</label>
+            <input type="text" formControlName="dateMovieProjector" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+        </div>
+        <div class="form-group col-5">
+            <label>movieProjector</label>
+            <input type="text" formControlName="hourMovieProjector" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+        </div>
+        <div class="col-md-6 ml-4 mt-n2" *ngIf="seats">
+            <label>Sillas seleccionadas</label>
+            <ul class="list-group">
+                <div>
+                    <li *ngFor="let data of seats" class="list-group-item session-item">
+                        {{data.numberSeats}}
+                    </li>
+                </div>
+            </ul>
+        </div>
+        <div class="form-group col" *ngIf="ticketSeats">
+            <label for="ticketSeats">Nuevas sillas</label>
+            <select class="form-select form-select-sm" aria-label="Default select example" formControlName="ticketSeats"
+                id="ticketSeat">
+                <option *ngFor="let seat of ticketSeats; let i = index" [value]="ticketSeats[i].id" [disabled]="seat.available==0">
+                    <span>{{seat.numberSeats}}</span>
+                </option>
+            </select>
+        </div>
+        <button (click)="loadSeat()" *ngIf="!editar" class="btn btn-primary">Editar</button>
+        <button (click)="cancelar()" class="btn btn-primary" *ngIf="editar">Cancelar</button>
+        <button (click)="guardar()" class="btn btn-success" *ngIf="editar">Guardar</button>
+    </div>
+</form>
