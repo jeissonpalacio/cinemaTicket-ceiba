@@ -68,7 +68,7 @@ public class Ticket {
         this.idMovieProjector = idMovieProjector;
         this.idSeats = idSeats;
     }
-    
+
     private void validatePrice(double price){
         if(price<= LIMITE_PRECIO_ERRONEO){
             throw new ExcepcionQuantity(ERROR_CANTIDAD_INCORRECTA);

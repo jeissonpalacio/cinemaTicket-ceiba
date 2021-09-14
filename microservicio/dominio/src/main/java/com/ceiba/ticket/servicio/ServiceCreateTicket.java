@@ -53,8 +53,6 @@ public class ServiceCreateTicket {
         if(localDateTime.isAfter(localDateProjection)){
             throw new ExcepcionProjectionTime(ERROR_DE_TIEMPO);
         }else if(days==0 && minutes<=60){
-                System.out.println("dias" + days);
-                System.out.println("minutos"+minutes);
                 throw new ExcepcionProjectionTime(NO_SE_PUEDE_HACER_UNA_HORA_ANTES);
         }
     }
