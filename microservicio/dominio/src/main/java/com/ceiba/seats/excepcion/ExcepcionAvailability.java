@@ -1,9 +1,9 @@
 package com.ceiba.seats.excepcion;
 
-public class ExcepcionDisponibilidad extends RuntimeException{
+public class ExcepcionAvailability extends RuntimeException{
     private static final long serialVersionUID = 1L;
 
-    public ExcepcionDisponibilidad(String mensaje){
+    public ExcepcionAvailability(String mensaje){
         super(mensaje);
     }
 

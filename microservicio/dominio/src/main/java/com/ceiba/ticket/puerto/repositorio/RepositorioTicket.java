@@ -8,10 +8,10 @@ public interface RepositorioTicket {
      * @param ticket
      * @return el id generado
      */
-    Long crearTicket(Ticket ticket);
-    void eliminarTicket(Long id);
-    boolean validarExiste(Long id);
-    Ticket obtenerTicket(Long id);
-    void cambiarProyeccionTicket(Ticket ticket);
+    Long createTicket(Ticket ticket);
+    void deleteTicket(Long id);
+    boolean validateExiste(Long id);
+    Ticket getTicket(Long id);
+    void changeProjectionTicket(Ticket ticket);
 
 }

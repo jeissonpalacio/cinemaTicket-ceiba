@@ -1,6 +1,19 @@
 <h1 *ngIf="!isAddMode">Edit Ticket</h1>
 
 <form [formGroup]="ticketForm">
+    <div *ngIf="alert" class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Ticket comprado exitosamente!</strong> Se ha reservado tus tickets.
+        <button (click)="closeAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div *ngIf="alerError" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Ticket resevado no se puede comprar !</strong> No se ha comprado el ticket
+        <button (click)="claseAlertError()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    
     <div class="form-row">
         <div class="form-group col-5">
             <label>Id del ticket</label>
@@ -51,8 +64,8 @@
                 </option>
             </select>
         </div>
-        <button (click)="loadSeat()" *ngIf="!editar" class="btn btn-primary">Editar</button>
-        <button (click)="cancelar()" class="btn btn-primary" *ngIf="editar">Cancelar</button>
-        <button (click)="guardar()" class="btn btn-success" *ngIf="editar">Guardar</button>
+        <button (click)="loadSeat()" *ngIf="!edit" class="btn btn-primary">Editar</button>
+        <button (click)="cancel()" class="btn btn-primary" *ngIf="edit">Cancelar</button>
+        <button (click)="save()" class="btn btn-success" *ngIf="edit">Guardar</button>
     </div>
 </form>

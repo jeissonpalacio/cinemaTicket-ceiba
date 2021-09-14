@@ -30,7 +30,7 @@ public class RepositorioSeatMySql implements RepositorioSeat {
     private static String sqlSeatUpdateAvailable;
 
     @Override
-    public void actualizarSeat(Integer idSeat, Long idTicket, Integer available) {
+    public void upgradeSeat(Integer idSeat, Long idTicket, Integer available) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("idSeat",idSeat);
         paramSource.addValue("idTicket", idTicket);
@@ -39,7 +39,7 @@ public class RepositorioSeatMySql implements RepositorioSeat {
     }
 
     @Override
-    public boolean validarSeat(Integer idSeat) {
+    public boolean validateSeat(Integer idSeat) {
 
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("idSeat", idSeat);
@@ -55,7 +55,7 @@ public class RepositorioSeatMySql implements RepositorioSeat {
     }
 
     @Override
-    public void actualizarSeatAvailable(Long idTicket,Long newidTicket, Integer available) {
+    public void upgradeSeatAvailable(Long idTicket, Long newidTicket, Integer available) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("IdTicketNew",newidTicket);
         paramSource.addValue("idTicket", idTicket);

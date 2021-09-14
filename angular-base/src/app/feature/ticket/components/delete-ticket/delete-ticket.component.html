@@ -12,7 +12,7 @@
         </button>
       </div>
       <div class="row">
-        <form [formGroup]="ticketForm" (ngSubmit)="consultarTickets()">
+        <form [formGroup]="ticketForm" (ngSubmit)="consultTickets()">
             <div class="mb-3">
                 <label form="idClient" class="form-label">Id client</label>
                 <input validar type="text" id="idClient" placeholder="Id del cliente" class="form-control" formControlName="idClient" aria-describedby="idClient"> 
@@ -32,7 +32,7 @@
             <tbody>
               <tr *ngFor="let ticket of tickets">
                 <th scope="row">{{ticket.id}}</th>
-                <td><button (click)="eliminar(ticket)" type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+                <td><button (click)="deleteTicket(ticket)" type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
               </tr>
             </tbody>
           </table>

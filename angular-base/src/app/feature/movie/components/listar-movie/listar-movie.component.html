@@ -1,5 +1,5 @@
 <div class="container mt-5 mb-3">
-    <div class="row" *ngFor="let movie of listaMovie | async">
+    <div class="row" *ngFor="let movie of listMovie | async">
         <div class="col-md-4 shadow p-3 mb-5 bg-white rounded">
             <div class="card p-3 mb-2">
                 <div class="d-flex justify-content-between">
@@ -12,7 +12,7 @@
                     <h3 class="heading">{{movie.name}}</h3>
                     <div class="mt-5">
                         <div class="mt-3">
-                            <button (click)="comprarTicket(movie)"><span class="text1">Comprar</span></button>
+                            <button (click)="buyTicket(movie)"><span class="text1">Comprar</span></button>
                         </div>
                     </div>
                 </div>

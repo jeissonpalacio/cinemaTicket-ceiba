@@ -6,6 +6,8 @@ import { Movie } from 'src/app/feature/movie/shared/model/movie';
 @Injectable()
 export class MovieProjectorService {
 
+  movieSelect:Movie;
+
   constructor(protected http: HttpService) {}
 
   public consultar(movie:Movie) {

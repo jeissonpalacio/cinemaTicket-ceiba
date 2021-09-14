@@ -1,21 +1,21 @@
 package com.ceiba.ticket.comando.manejador;
 
 import com.ceiba.manejador.ManejadorComando;
-import com.ceiba.ticket.servicio.ServicioEliminarTicket;
+import com.ceiba.ticket.servicio.ServiceDeleteTicket;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ManejadorEliminarTicket implements ManejadorComando<Long> {
 
-    private final ServicioEliminarTicket servicioEliminarTicket;
+    private final ServiceDeleteTicket serviceDeleteTicket;
 
-    public ManejadorEliminarTicket(ServicioEliminarTicket servicioEliminarTicket
+    public ManejadorEliminarTicket(ServiceDeleteTicket serviceDeleteTicket
     ){
-        this.servicioEliminarTicket = servicioEliminarTicket;
+        this.serviceDeleteTicket = serviceDeleteTicket;
     }
 
     @Override
     public void ejecutar(Long idTicket) {
-        this.servicioEliminarTicket.eliminarTicket(idTicket);
+        this.serviceDeleteTicket.eliminarTicket(idTicket);
     }
 }

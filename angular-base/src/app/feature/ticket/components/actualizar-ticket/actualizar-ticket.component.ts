@@ -14,19 +14,21 @@ import { Component, OnInit } from '@angular/core';
 export class ActualizarTicketComponent implements OnInit {
 
   ticket: Ticket;
+  alerError: boolean=false;
+  alert: boolean=false;
   ticketForm: FormGroup;
   isAddMode!: boolean;
   submitted = false;
   movieProjectorData:MovieProjector;
   seats:Seat[];
   ticketSeats:Seat[];
-  editar = false;
+  edit = false;
   constructor(protected ticketService:TicketService,protected seatService:SeatService,private formBuilder: FormBuilder) {}
 
 
   ngOnInit(): void {
     this.submitted = false;
-    this.ticket = this.ticketService.ticketSeleccionado;
+    this.ticket = this.ticketService.ticketSelect;
 
     this.isAddMode = !this.ticket;
 
@@ -53,12 +55,18 @@ export class ActualizarTicketComponent implements OnInit {
                           this.ticketForm.controls.movieProjector.patchValue(data.id);
                           this.ticketForm.controls.dateMovieProjector.patchValue(data.movieProjection);
                           this.ticketForm.controls.hourMovieProjector.patchValue(data.hourMovie);
+                        },(error) => {
+                          this.alerError = true;
+                          throw new Error(error);
                         });
 
       this.ticketService.listarSeatPorIdDelTicket(this.ticket.id)
                         .subscribe(x=>{
                           this.seats = x;
                           this.ticketForm.patchValue(x);
+                        },(error) => {
+                          this.alerError = true;
+                          throw new Error(error);
                         });
       
 
@@ -69,22 +77,39 @@ export class ActualizarTicketComponent implements OnInit {
     console.log('movieprojector' + this.movieProjectorData);
     this.seatService.consultar(this.movieProjectorData).subscribe((data) => {
       this.ticketSeats = data;
+    },(error) => {
+      this.alerError = true;
+      throw new Error(error);
     });
-    this.editar = true;
+    this.edit = true;
   }
 
-  cancelar(){
+  cancel(){
     console.log(this.ticketForm.value.ticketSeats);
-    this.editar=false;
+    this.edit=false;
   }
 
-  guardar(){
+  save(){
     let ticketnew = new Ticket(null,this.ticket.idClient,this.ticketForm.value.amount,this.ticket.idMovieProjector,[this.ticketForm.value.ticketSeats])
     this.ticketService.actualizar(this.ticket.id,ticketnew).subscribe((data)=>{
         console.log(data);
+        this.alert=true;
+        this.edit=false;
+    },(error) => {
+      this.alerError = true;
+      throw new Error(error);
     });
   
   }
+  
+  claseAlertError(){
+    this.alerError=false;
+  }
+  closeAlert(){
+    this.alert=false;
+  }
+
+
   get f() { return this.ticketForm.controls; }
 
 

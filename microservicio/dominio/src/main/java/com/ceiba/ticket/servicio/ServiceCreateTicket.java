@@ -1,10 +1,10 @@
 package com.ceiba.ticket.servicio;
 
-import com.ceiba.movie_projector.exception.ExcepcionTiempoProyeccion;
+import com.ceiba.movie_projector.exception.ExcepcionProjectionTime;
 import com.ceiba.movie_projector.modelo.entidad.MovieProjector;
-import com.ceiba.movie_projector.puerto.repositorio.MovieProjectorRepositorio;
-import com.ceiba.seats.excepcion.ExcepcionDisponibilidad;
-import com.ceiba.seats.excepcion.ExcepcionExistencia;
+import com.ceiba.movie_projector.puerto.repositorio.MovieProjectorRepository;
+import com.ceiba.seats.excepcion.ExcepcionAvailability;
+import com.ceiba.seats.excepcion.ExcepcionExistence;
 import com.ceiba.seats.puerto.repositorio.RepositorioSeat;
 import com.ceiba.ticket.modelo.entidad.Ticket;
 import com.ceiba.ticket.puerto.repositorio.RepositorioTicket;
@@ -12,7 +12,7 @@ import com.ceiba.ticket.puerto.repositorio.RepositorioTicket;
 import java.time.*;
 import java.time.temporal.ChronoUnit;
 
-public class ServicioCrearTicket {
+public class ServiceCreateTicket {
 
     private static final String NO_EXISTE_SEAT = "No existe el seat";
     private static final String LA_SILLA_ESTA_RESERVADA = "La silla esta siendo reservada";
@@ -21,61 +21,61 @@ public class ServicioCrearTicket {
 
     private final RepositorioTicket repositorioTicket;
     private final RepositorioSeat  repositorioSeat;
-    private final MovieProjectorRepositorio movieProjectorRepositorio;
+    private final MovieProjectorRepository movieProjectorRepository;
 
-    public ServicioCrearTicket(RepositorioTicket repositorioTicket, RepositorioSeat repositorioSeat,
-                               MovieProjectorRepositorio movieProjectorRepositorio){
+    public ServiceCreateTicket(RepositorioTicket repositorioTicket, RepositorioSeat repositorioSeat,
+                               MovieProjectorRepository movieProjectorRepository){
         this.repositorioTicket = repositorioTicket;
         this.repositorioSeat = repositorioSeat;
-        this.movieProjectorRepositorio = movieProjectorRepositorio;
+        this.movieProjectorRepository = movieProjectorRepository;
     }
 
 
-    public void validarExistenciaSeat(Integer idSeat){
-        boolean existe = repositorioSeat.validarSeat(idSeat);
+    private void validateExistenceSeat(Integer idSeat){
+        boolean existe = repositorioSeat.validateSeat(idSeat);
         if(!existe){
-            throw new ExcepcionExistencia(NO_EXISTE_SEAT);
+            throw new ExcepcionExistence(NO_EXISTE_SEAT);
         }
     }
-    public void validarDisponibilidad(Integer idSeat){
+    private void validateAvailability(Integer idSeat){
         Long disponibilidad = repositorioSeat.consultavailable(idSeat);
         if(disponibilidad==0){
-            throw new ExcepcionDisponibilidad(LA_SILLA_ESTA_RESERVADA);
+            throw new ExcepcionAvailability(LA_SILLA_ESTA_RESERVADA);
         }
     }
-    public void purchaseEnabled(LocalDate date, LocalTime time){
+    private void purchaseEnabled(LocalDate date, LocalTime time){
         LocalDate localDate = LocalDate.now();
         LocalDateTime localDateTime = localDate.atTime(LocalTime.now());
         LocalDateTime localDateProjection = date.atTime(time);
         long minutes = ChronoUnit.MINUTES.between(localDateTime, localDateProjection);
         final long days = ChronoUnit.DAYS.between(localDate,localDateProjection);
         if(localDateTime.isAfter(localDateProjection)){
-            throw new ExcepcionTiempoProyeccion(ERROR_DE_TIEMPO);
+            throw new ExcepcionProjectionTime(ERROR_DE_TIEMPO);
 
         }else if(days==0 && minutes<=60){
-                throw new ExcepcionTiempoProyeccion(NO_SE_PUEDE_HACER_UNA_HORA_ANTES);
+                throw new ExcepcionProjectionTime(NO_SE_PUEDE_HACER_UNA_HORA_ANTES);
         }
     }
 
-    public Double calculateHalfPrice(LocalDate date, double price){
+    private Double calculateHalfPrice(LocalDate date, double price){
         if(date.getDayOfWeek() == DayOfWeek.TUESDAY || DayOfWeek.THURSDAY == date.getDayOfWeek()){
-            price = price/3;
+            price = price/2;
         }
 
         return price;
     }
 
 
-    public Long crearServicioTicket(Ticket ticket){
+    public Long ejecutar(Ticket ticket){
         ticket.getIdSeats().forEach(e->{
-            validarExistenciaSeat(e);
-            validarDisponibilidad(e);
+            validateExistenceSeat(e);
+            validateAvailability(e);
         });
-        MovieProjector movieProjector = this.movieProjectorRepositorio.findbyMovieProjectorForId(ticket.getIdMovieProjector());
+        MovieProjector movieProjector = this.movieProjectorRepository.findbyMovieProjectorForId(ticket.getIdMovieProjector());
         purchaseEnabled(movieProjector.getMovieProjection(),movieProjector.getHourMovie());
         ticket.setAmount(calculateHalfPrice(movieProjector.getMovieProjection(),ticket.getAmount()));
-        Long id = this.repositorioTicket.crearTicket(ticket);
-        ticket.getIdSeats().forEach(value -> repositorioSeat.actualizarSeat(value,id,0));
+        Long id = this.repositorioTicket.createTicket(ticket);
+        ticket.getIdSeats().forEach(value -> repositorioSeat.upgradeSeat(value,id,0));
         return id;
     }
 }

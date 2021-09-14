@@ -12,19 +12,19 @@ const routes: Routes = [
     component: TicketComponent,
     children:[
       {
-        path:'crear',
+        path:'create',
         component: CreateTicketComponent
       },
       {
-        path:'editar',
+        path:'edit',
         component:ListarActualizarTicketComponent
       },
       {
-        path:'eliminar',
+        path:'delete',
         component:DeleteTicketComponent
       },
       {
-        path:'actualizar',
+        path:'update',
         component:ActualizarTicketComponent
       }
     ]

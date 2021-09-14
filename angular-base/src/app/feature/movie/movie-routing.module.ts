@@ -9,7 +9,7 @@ const routes: Routes = [
     component: MovieComponent,
     children:[
       {
-        path:'listar',
+        path:'list',
         component: ListarMovieComponent
       }
     ]

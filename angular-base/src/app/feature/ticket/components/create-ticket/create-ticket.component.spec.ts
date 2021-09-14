@@ -78,7 +78,7 @@ describe('CreateTicketComponent', () => {
     expect(component.ticketForm.valid).toBeTruthy();
     component.onSeats(listMovieProjector[0]);
     component.onSelectSeat(seat[0]);
-    component.crear();
+    component.create();
 
   });
 

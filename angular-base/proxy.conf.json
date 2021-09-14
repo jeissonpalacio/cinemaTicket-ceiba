@@ -1,6 +1,6 @@
 {
-  "/cineadn/*": {
-    "target": "localhost:8080",
+  "*": {
+    "target": "http://localhost:8080/cineadn/movies",
     "secure":false,
     "logLevel": "debug"
   }

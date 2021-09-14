@@ -32,33 +32,33 @@ public class RepositorioTicketMySql implements RepositorioTicket {
     }
 
     @Override
-    public Long crearTicket(Ticket ticket) {
+    public Long createTicket(Ticket ticket) {
         return this.customNamedParameterJdbcTemplate.crear(ticket,sqlCreateTicket);
     }
 
     @Override
-    public void eliminarTicket(Long id) {
+    public void deleteTicket(Long id) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("id", id);
         this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminar,paramSource);
     }
 
     @Override
-    public boolean validarExiste(Long id) {
+    public boolean validateExiste(Long id) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("id",id);
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExiste,parameterSource,Boolean.class);
     }
 
     @Override
-    public Ticket obtenerTicket(Long id) {
+    public Ticket getTicket(Long id) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("id",id);
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlGetTicket,parameterSource,new MapeoTicketModel());
     }
 
     @Override
-    public void cambiarProyeccionTicket(Ticket ticket) {
+    public void changeProjectionTicket(Ticket ticket) {
         this.customNamedParameterJdbcTemplate.actualizar(ticket,sqlUpdate);
     }
 

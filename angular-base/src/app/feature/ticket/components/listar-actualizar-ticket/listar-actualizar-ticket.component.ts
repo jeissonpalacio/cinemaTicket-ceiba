@@ -27,18 +27,18 @@ export class ListarActualizarTicketComponent implements OnInit {
       idClient: new FormControl('',[Validators.required])
     });
   }
-  consultarTickets(){
+  consultTickets(){
     this.ticketService.listarTickerPorIdClient(this.ticketForm.value.idClient).subscribe((data)=>{
       this.tickets = data;
-    },(error)=>{
-      console.log(error);
+    },(error) => {
+      throw new Error(error);
     });
 
   }
 
-  actualizarTicket(ticket:Ticket){
-    this.ticketService.ticketSeleccionado = ticket;
-    this.router.navigateByUrl('/ticket/actualizar');
+  updateTicket(ticket:Ticket){
+    this.ticketService.ticketSelect = ticket;
+    this.router.navigateByUrl('/ticket/update');
   }
 
   claseAlertError(){

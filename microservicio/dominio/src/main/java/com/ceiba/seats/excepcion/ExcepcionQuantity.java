@@ -1,11 +1,9 @@
 package com.ceiba.seats.excepcion;
 
-public class ExcepcionExistencia extends   RuntimeException{
+public class ExcepcionQuantity extends  RuntimeException{
     private static final long serialVersionUID = 1L;
 
-
-    public ExcepcionExistencia(String mensaje) {
+    public ExcepcionQuantity(String mensaje) {
         super(mensaje);
     }
-
 }

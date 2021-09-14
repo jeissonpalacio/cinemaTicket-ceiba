@@ -3,12 +3,12 @@ package com.ceiba.movie_projector.adaptador.repositorio;
 import com.ceiba.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
 import com.ceiba.infraestructura.jdbc.sqlstatement.SqlStatement;
 import com.ceiba.movie_projector.modelo.entidad.MovieProjector;
-import com.ceiba.movie_projector.puerto.repositorio.MovieProjectorRepositorio;
+import com.ceiba.movie_projector.puerto.repositorio.MovieProjectorRepository;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class RepositorioMovieProjectorMySql implements MovieProjectorRepositorio {
+public class RepositorioMovieProjectorMySql implements MovieProjectorRepository {
 
     private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 

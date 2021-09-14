@@ -30,7 +30,7 @@ describe('MovieService', () => {
 
   it('listar movies',()=>{
     const dummyMovie = [new Movie(1,'Joker','Comedy','1:40',4)];
-    service.consultar().subscribe(movie=>{
+    service.consultMovie().subscribe(movie=>{
       expect(movie.length).toBe(1);
       expect(movie).toEqual(dummyMovie);
     });

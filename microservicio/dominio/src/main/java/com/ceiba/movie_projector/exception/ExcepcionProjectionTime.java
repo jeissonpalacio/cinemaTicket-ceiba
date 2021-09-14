@@ -1,9 +1,9 @@
 package com.ceiba.movie_projector.exception;
 
-public class ExcepcionTiempoProyeccion extends  RuntimeException{
+public class ExcepcionProjectionTime extends  RuntimeException{
     private static final long serialVersionUID = 1L;
 
-    public ExcepcionTiempoProyeccion(String message){
+    public ExcepcionProjectionTime(String message){
         super(message);
     }
 }

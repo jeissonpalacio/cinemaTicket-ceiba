@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 export class TicketService {
 
 
-  ticketSeleccionado:Ticket;
+  ticketSelect:Ticket;
 
   constructor(protected http: HttpService) {}
 

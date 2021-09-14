@@ -1,10 +1,12 @@
 package com.ceiba.ticket.modelo.entidad;
 
 import com.ceiba.dominio.ValidadorArgumento;
-import com.ceiba.seats.excepcion.ExcepcionCantidad;
+import com.ceiba.seats.excepcion.ExcepcionQuantity;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.List;
 
 import static com.ceiba.dominio.ValidadorArgumento.validarObligatorio;
@@ -65,15 +67,17 @@ public class Ticket {
     }
     public void validatePrice(double price){
         if(price<=0){
-            throw new ExcepcionCantidad(ERROR_CANTIDAD_INCORRECTA);
+            throw new ExcepcionQuantity(ERROR_CANTIDAD_INCORRECTA);
         }
     }
 
     public void validarCantidad(List<Integer> listId){
         boolean existe = listId.size()>0 && listId.size()<=2;
         if(!existe){
-            throw new ExcepcionCantidad(SOLO_PUEDE_TENER_DOS_ASIENTOS);
+            throw new ExcepcionQuantity(SOLO_PUEDE_TENER_DOS_ASIENTOS);
         }
-    };
+    }
+
+
 
 }

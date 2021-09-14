@@ -10,18 +10,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./listar-movie.component.css']
 })
 export class ListarMovieComponent implements OnInit {
-  public listaMovie: Observable<Movie[]>;
+  public listMovie: Observable<Movie[]>;
 
   constructor(protected movieService:MovieService,private router: Router) { }
 
   ngOnInit(): void {
   
-    this.listaMovie = this.movieService.consultar();
+    this.listMovie = this.movieService.consultMovie();
   }
 
-  comprarTicket(movie:Movie){
+  buyTicket(movie:Movie){
     console.log(movie);
-    this.router.navigate(['ticket/crear',{movie: JSON.stringify(movie)}]);
+    this.router.navigate(['ticket/create',{movie: JSON.stringify(movie)}]);
   }
 
 }

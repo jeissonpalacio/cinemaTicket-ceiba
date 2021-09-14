@@ -25,7 +25,7 @@ export class DeleteTicketComponent implements OnInit {
       idClient: new FormControl('',[Validators.required])
     });
   }
-  consultarTickets(){
+  consultTickets(){
     this.ticketService.listarTickerPorIdClient(this.ticketForm.value.idClient).subscribe((data)=>{
       this.tickets = data;
     },(error)=>{
@@ -33,7 +33,7 @@ export class DeleteTicketComponent implements OnInit {
     });
 
   }
-  eliminar(ticket:Ticket){
+  deleteTicket(ticket:Ticket){
     console.log(ticket);
     this.ticketService.deleteTicket(ticket.id).subscribe((ticket)=>{
       console.log(ticket);
@@ -41,7 +41,7 @@ export class DeleteTicketComponent implements OnInit {
       this.alert=true;
     },(error)=>{
       this.alerError=true;
-      console.log(error);
+      throw new Error(error);
     });
   }
 
