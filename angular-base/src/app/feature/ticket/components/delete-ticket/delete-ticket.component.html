@@ -1,12 +1,12 @@
 <div class="container">
     <div *ngIf="alert" class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Ticket comprado exitosamente!</strong> Se ha reservado tus tickets.
+        <strong>Ticket eliminado exitosamente!</strong> Se ha elimado tu tickets.
         <button (click)="closeAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div *ngIf="alerError" class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Ticket resevado no se puede comprar !</strong> No se ha comprado el ticket
+        <strong>No se pudo eliminar tu ticket !</strong> No se ha podido eliminar el ticket
         <button (click)="claseAlertError()" type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

@@ -3,6 +3,7 @@ package com.ceiba.configuracion;
 import com.ceiba.movie_projector.puerto.repositorio.MovieProjectorRepository;
 import com.ceiba.seats.puerto.repositorio.RepositorioSeat;
 import com.ceiba.ticket.puerto.repositorio.RepositorioTicket;
+import com.ceiba.ticket.servicio.ServiceCalculateHalfPrice;
 import com.ceiba.ticket.servicio.ServiceCreateTicket;
 import com.ceiba.ticket.servicio.ServiceUpdateTicket;
 import com.ceiba.ticket.servicio.ServiceDeleteTicket;
@@ -18,17 +19,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class BeanServicio {
 
-    // Otra opcion?
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("http://localhost:4200").allowedMethods("GET","POST","PUT","DELETE");
-            }
-        };
-    }
 
+    @Bean
+    public ServiceCalculateHalfPrice serviceCalculateHalfPrice(){
+        return new ServiceCalculateHalfPrice();
+    }
     @Bean
     public ServicioCrearUsuario servicioCrearUsuario(RepositorioUsuario repositorioUsuario) {
         return new ServicioCrearUsuario(repositorioUsuario);
@@ -60,8 +55,8 @@ public class BeanServicio {
 
     @Bean
     public ServiceCreateTicket servicioCrearTicket(RepositorioTicket repositorioTicket, RepositorioSeat repositorioSeat,
-                                                   MovieProjectorRepository movieProjectorRepository){
-        return new ServiceCreateTicket(repositorioTicket,repositorioSeat, movieProjectorRepository);
+                                                   MovieProjectorRepository movieProjectorRepository, ServiceCalculateHalfPrice serviceCalculateHalfPrice){
+        return new ServiceCreateTicket(repositorioTicket,repositorioSeat, movieProjectorRepository,serviceCalculateHalfPrice);
     }
 	
 

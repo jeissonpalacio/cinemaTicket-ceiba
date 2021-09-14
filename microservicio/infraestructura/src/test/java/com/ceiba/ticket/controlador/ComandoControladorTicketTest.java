@@ -1,7 +1,7 @@
 package com.ceiba.ticket.controlador;
 
 import com.ceiba.ApplicationMock;
-import com.ceiba.ticket.comando.ComandoTicket;
+import com.ceiba.ticket.comando.CommandTicket;
 import com.ceiba.ticket.servicio.testdatabuilder.ComandoTicketTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes= ApplicationMock.class)
-@WebMvcTest(ComandoControladorTicket.class)
+@WebMvcTest(CommandControladorTicket.class)
 public class ComandoControladorTicketTest {
 
     @Autowired
@@ -35,7 +35,7 @@ public class ComandoControladorTicketTest {
     @Order(2)
     public void crear() throws Exception{
         // arrange
-        ComandoTicket ticket = new ComandoTicketTestDataBuilder().build();
+        CommandTicket ticket = new ComandoTicketTestDataBuilder().build();
 
         // act - assert
         mocMvc.perform(post("/ticket")
@@ -51,7 +51,7 @@ public class ComandoControladorTicketTest {
     public void actualizar() throws Exception{
         // arrange
         Long id = 1L;
-        ComandoTicket ticket = new ComandoTicketTestDataBuilder().build();
+        CommandTicket ticket = new ComandoTicketTestDataBuilder().build();
 
         // act - assert
         mocMvc.perform(put("/ticket/{id}",id)

@@ -29,7 +29,13 @@ public class ServiceUpdateTicketTest {
         ServiceUpdateTicket serviceUpdateTicket = new ServiceUpdateTicket(repositorioTicket,repositorioSeat, movieProjectorRepository);
         LocalDate time = LocalDate.now();
         LocalTime localTime = LocalTime.now();
-        BasePrueba.assertThrows(()-> serviceUpdateTicket.validateTimeLimit(time,localTime), ExcepcionTimeForChange.class,"El tiempo de cambio paso");
+        Ticket ticket = new TicketTestDataBuilder().build();
+        Mockito.when(movieProjectorRepository.findbyMovieProjectorForId(Mockito.anyInt())).thenReturn(new MovieProjectorTestDataBuilder().conMovieProjection(time).conHourMovie(localTime).build());
+        Mockito.when(repositorioTicket.validateExiste(Mockito.anyLong())).thenReturn(true);
+        Mockito.when(repositorioSeat.validateSeat(Mockito.anyInt())).thenReturn(true);
+        Mockito.when(repositorioSeat.consultavailable(Mockito.anyInt())).thenReturn(1L);
+
+        BasePrueba.assertThrows(()-> serviceUpdateTicket.actualizarTicket(ticket), ExcepcionTimeForChange.class,"El tiempo de cambio paso");
     }
 
     @Test
@@ -39,7 +45,11 @@ public class ServiceUpdateTicketTest {
         MovieProjectorRepository movieProjectorRepository = Mockito.mock(MovieProjectorRepository.class);
         Mockito.when(repositorioSeat.consultavailable(Mockito.anyInt())).thenReturn(0L);
         ServiceUpdateTicket serviceUpdateTicket = new ServiceUpdateTicket(repositorioTicket,repositorioSeat, movieProjectorRepository);
-        BasePrueba.assertThrows(()-> serviceUpdateTicket.validarDisponibilidad(1), ExcepcionAvailability.class,"La silla esta siendo reservada");
+        Ticket ticket = new TicketTestDataBuilder().build();
+        Mockito.when(movieProjectorRepository.findbyMovieProjectorForId(Mockito.anyInt())).thenReturn(new MovieProjectorTestDataBuilder().build());
+        Mockito.when(repositorioTicket.validateExiste(Mockito.anyLong())).thenReturn(true);
+        Mockito.when(repositorioSeat.validateSeat(Mockito.anyInt())).thenReturn(true);
+        BasePrueba.assertThrows(()-> serviceUpdateTicket.actualizarTicket(ticket), ExcepcionAvailability.class,"La silla esta siendo reservada");
 
 
     }
@@ -51,35 +61,14 @@ public class ServiceUpdateTicketTest {
         MovieProjectorRepository movieProjectorRepository = Mockito.mock(MovieProjectorRepository.class);
         Mockito.when(repositorioSeat.validateSeat(Mockito.anyInt())).thenReturn(false);
         ServiceUpdateTicket serviceUpdateTicket = new ServiceUpdateTicket(repositorioTicket,repositorioSeat, movieProjectorRepository);
+        Ticket ticket = new TicketTestDataBuilder().build();
+        Mockito.when(repositorioTicket.validateExiste(Mockito.anyLong())).thenReturn(true);
+
         // act - assert
-        BasePrueba.assertThrows(() -> serviceUpdateTicket.validarExistenciaSeat(1), ExcepcionExistence.class,"No existe el seat");
+        BasePrueba.assertThrows(() ->  serviceUpdateTicket.actualizarTicket(ticket), ExcepcionExistence.class,"No existe el seat");
     }
 
-    @Test
-    public void validateTimeLimitSuccesfulTest(){
-        RepositorioTicket repositorioTicket = Mockito.mock(RepositorioTicket.class);
-        RepositorioSeat repositorioSeat = Mockito.mock(RepositorioSeat.class);
-        MovieProjectorRepository movieProjectorRepository = Mockito.mock(MovieProjectorRepository.class);
-        ServiceUpdateTicket serviceUpdateTicket = new ServiceUpdateTicket(repositorioTicket,repositorioSeat, movieProjectorRepository);
-        ServiceUpdateTicket serviceUpdateTicketSpy = Mockito.spy(serviceUpdateTicket);
-        LocalDate time = LocalDate.now().plusDays(2);
-        LocalTime localTime = LocalTime.now();
-        LocalDateTime localDateTime = time.atTime(localTime);
-        serviceUpdateTicketSpy.validateTimeLimit(localDateTime.toLocalDate(),localDateTime.toLocalTime());
-        Mockito.verify(serviceUpdateTicketSpy).validateTimeLimit(localDateTime.toLocalDate(),localDateTime.toLocalTime());
-    }
 
-    @Test
-    public void validarDisponibilidadSuccesfulTest(){
-        RepositorioSeat repositorioSeat = Mockito.mock(RepositorioSeat.class);
-        RepositorioTicket repositorioTicket = Mockito.mock(RepositorioTicket.class);
-        MovieProjectorRepository movieProjectorRepository = Mockito.mock(MovieProjectorRepository.class);
-        Mockito.when(repositorioSeat.consultavailable(Mockito.anyInt())).thenReturn(1L);
-        ServiceUpdateTicket serviceUpdateTicket = new ServiceUpdateTicket(repositorioTicket,repositorioSeat, movieProjectorRepository);
-        ServiceUpdateTicket serviceUpdateTicketSpy = Mockito.spy(serviceUpdateTicket);
-        serviceUpdateTicketSpy.validarDisponibilidad(1);
-        Mockito.verify(serviceUpdateTicketSpy).validarDisponibilidad(1);
-    }
     @Test
     public void validateExistTest(){
         RepositorioSeat repositorioSeat = Mockito.mock(RepositorioSeat.class);
@@ -87,32 +76,12 @@ public class ServiceUpdateTicketTest {
         MovieProjectorRepository movieProjectorRepository = Mockito.mock(MovieProjectorRepository.class);
         Mockito.when(repositorioTicket.validateExiste(Mockito.any())).thenReturn(false);
         ServiceUpdateTicket serviceUpdateTicket = new ServiceUpdateTicket(repositorioTicket,repositorioSeat, movieProjectorRepository);
-        BasePrueba.assertThrows(() -> serviceUpdateTicket.validateExist(1L), ExcepcionExistenceTicket.class,"No existe el ticket");
+        Ticket ticket = new TicketTestDataBuilder().build();
+
+        BasePrueba.assertThrows(() -> serviceUpdateTicket.actualizarTicket(ticket), ExcepcionExistenceTicket.class,"No existe el ticket");
     }
 
-    @Test
-    public void validateExistSuccesfulTest(){
-        RepositorioSeat repositorioSeat = Mockito.mock(RepositorioSeat.class);
-        RepositorioTicket repositorioTicket = Mockito.mock(RepositorioTicket.class);
-        MovieProjectorRepository movieProjectorRepository = Mockito.mock(MovieProjectorRepository.class);
-        Mockito.when(repositorioTicket.validateExiste(Mockito.any())).thenReturn(true);
-        ServiceUpdateTicket serviceUpdateTicket = new ServiceUpdateTicket(repositorioTicket,repositorioSeat, movieProjectorRepository);
-        ServiceUpdateTicket serviceUpdateTicketSpy = Mockito.spy(serviceUpdateTicket);
-        serviceUpdateTicketSpy.validateExist(1L);
-        Mockito.verify(serviceUpdateTicketSpy).validateExist(1L);
 
-    }
-    @Test
-    public void validarExistenciaSeatSuccesfulTest(){
-        RepositorioSeat repositorioSeat = Mockito.mock(RepositorioSeat.class);
-        RepositorioTicket repositorioTicket = Mockito.mock(RepositorioTicket.class);
-        MovieProjectorRepository movieProjectorRepository = Mockito.mock(MovieProjectorRepository.class);
-        Mockito.when(repositorioSeat.validateSeat(Mockito.anyInt())).thenReturn(true);
-        ServiceUpdateTicket serviceUpdateTicket = new ServiceUpdateTicket(repositorioTicket,repositorioSeat, movieProjectorRepository);
-        ServiceUpdateTicket serviceUpdateTicketSpy = Mockito.spy(serviceUpdateTicket);
-        serviceUpdateTicketSpy.validarExistenciaSeat(1);
-        Mockito.verify(serviceUpdateTicketSpy).validarExistenciaSeat(1);
-    }
 
 
     @Test

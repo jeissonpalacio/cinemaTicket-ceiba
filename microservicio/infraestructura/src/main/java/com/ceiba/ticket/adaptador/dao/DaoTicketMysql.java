@@ -26,14 +26,14 @@ public class DaoTicketMysql implements DaoTicket {
     }
 
     @Override
-    public List<DtoTicket> listarTicket() {
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlListarTicket, new MapeoTicket());
+    public List<DtoTicket> listTicket() {
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlListarTicket, new MapperTicket());
     }
 
     @Override
     public List<DtoTicket> getTicketForIdClient(Long id) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("id",id);
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlGetTicketByClientId,parameterSource,new MapeoTicket());
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlGetTicketByClientId,parameterSource,new MapperTicket());
     }
 }

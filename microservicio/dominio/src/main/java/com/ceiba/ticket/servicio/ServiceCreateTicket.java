@@ -22,12 +22,13 @@ public class ServiceCreateTicket {
     private final RepositorioTicket repositorioTicket;
     private final RepositorioSeat  repositorioSeat;
     private final MovieProjectorRepository movieProjectorRepository;
-
+    private final ServiceCalculateHalfPrice serviceCalculateHalfPrice;
     public ServiceCreateTicket(RepositorioTicket repositorioTicket, RepositorioSeat repositorioSeat,
-                               MovieProjectorRepository movieProjectorRepository){
+                               MovieProjectorRepository movieProjectorRepository,ServiceCalculateHalfPrice serviceCalculateHalfPrice){
         this.repositorioTicket = repositorioTicket;
         this.repositorioSeat = repositorioSeat;
         this.movieProjectorRepository = movieProjectorRepository;
+        this.serviceCalculateHalfPrice = serviceCalculateHalfPrice;
     }
 
 
@@ -57,15 +58,6 @@ public class ServiceCreateTicket {
         }
     }
 
-    private Double calculateHalfPrice(LocalDate date, double price){
-        if(date.getDayOfWeek() == DayOfWeek.TUESDAY || DayOfWeek.THURSDAY == date.getDayOfWeek()){
-            price = price/2;
-        }
-
-        return price;
-    }
-
-
     public Long ejecutar(Ticket ticket){
         ticket.getIdSeats().forEach(e->{
             validateExistenceSeat(e);
@@ -73,7 +65,7 @@ public class ServiceCreateTicket {
         });
         MovieProjector movieProjector = this.movieProjectorRepository.findbyMovieProjectorForId(ticket.getIdMovieProjector());
         purchaseEnabled(movieProjector.getMovieProjection(),movieProjector.getHourMovie());
-        ticket.setAmount(calculateHalfPrice(movieProjector.getMovieProjection(),ticket.getAmount()));
+        ticket.setAmount(serviceCalculateHalfPrice.ejecutar(movieProjector.getMovieProjection(),ticket.getAmount()));
         Long id = this.repositorioTicket.createTicket(ticket);
         ticket.getIdSeats().forEach(value -> repositorioSeat.upgradeSeat(value,id,0));
         return id;

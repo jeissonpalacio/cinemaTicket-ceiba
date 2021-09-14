@@ -34,7 +34,7 @@ public class ServiceUpdateTicket {
         this.movieProjectorRepository = movieProjectorRepository;
 
     }
-    public void validateTimeLimit(LocalDate date,LocalTime time){
+    private void validateTimeLimit(LocalDate date,LocalTime time){
         LocalDate localDate = LocalDate.now();
         LocalDateTime localDateTime = localDate.atTime(LocalTime.now());
         LocalDateTime localDateProjection = date.atTime(time);
@@ -43,20 +43,20 @@ public class ServiceUpdateTicket {
             throw  new ExcepcionTimeForChange(EL_TIEMPO_DE_CAMBIO_PASO);
         }
     }
-    public void validarDisponibilidad(Integer idSeat){
+    private void validarDisponibilidad(Integer idSeat){
         Long disponibilidad = repositorioSeat.consultavailable(idSeat);
         if(disponibilidad==0){
             throw new ExcepcionAvailability(LA_SILLA_ESTA_RESERVADA);
         }
     }
-    public void validateExist(Long idTicket){
+    private void validateExist(Long idTicket){
 
         boolean exist = this.repositorioTicket.validateExiste(idTicket);
         if(!exist){
             throw new ExcepcionExistenceTicket(NO_EXISTE_EL_TICKET);
         }
     }
-    public void validarExistenciaSeat(Integer idSeat){
+    private void validarExistenciaSeat(Integer idSeat){
         boolean existe = repositorioSeat.validateSeat(idSeat);
         if(!existe){
             throw new ExcepcionExistence(NO_EXISTE_SEAT);

@@ -14,7 +14,7 @@ public class DaoMovieMysql  implements DaoMovie {
     private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 
     @SqlStatement(namespace = "movie",value = "list")
-    private static String sqlListar;
+    private static String sqlList;
 
     public DaoMovieMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate){
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
@@ -23,6 +23,6 @@ public class DaoMovieMysql  implements DaoMovie {
 
     @Override
     public List<DtoMovie> ListMovie() {
-       return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlListar,new MapeoMovie() );
+       return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlList,new MapperMovie() );
     }
 }

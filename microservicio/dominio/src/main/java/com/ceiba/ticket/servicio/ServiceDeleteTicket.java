@@ -29,14 +29,14 @@ public class ServiceDeleteTicket {
         this.repositorioSeat = repositorioSeat;
     }
 
-    public void validateExist(Long idTicket){
+    private void validateExist(Long idTicket){
 
         boolean exist = this.repositorioTicket.validateExiste(idTicket);
         if(!exist){
             throw new ExcepcionExistenceTicket(NO_EXISTE_EL_TICKET);
         }
     }
-    public void validateTimeLimit(LocalDate date,LocalTime time){
+    private void validateTimeLimit(LocalDate date,LocalTime time){
         LocalDate localDate = LocalDate.now();
         LocalDateTime localDateTime = localDate.atTime(LocalTime.now());
         LocalDateTime localDateProjection = date.atTime(time);

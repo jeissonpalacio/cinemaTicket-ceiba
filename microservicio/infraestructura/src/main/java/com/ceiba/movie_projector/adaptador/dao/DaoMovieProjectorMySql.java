@@ -4,7 +4,6 @@ import com.ceiba.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
 import com.ceiba.infraestructura.jdbc.sqlstatement.SqlStatement;
 import com.ceiba.movie_projector.modelo.dto.DtoMovieProjector;
 import com.ceiba.movie_projector.puerto.dao.DaoMovieProjector;
-import com.ceiba.ticket.adaptador.repositorio.MapeoTicketModel;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Component;
 
@@ -16,34 +15,34 @@ public class DaoMovieProjectorMySql  implements DaoMovieProjector {
     private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 
     @SqlStatement(namespace = "movie_projector",value = "list")
-    private static String sqlListarMovieProjector;
+    private static String sqlListMovieProjector;
 
     @SqlStatement(namespace = "movie_projector",value = "listbyIdMovie")
     private static String sqlListMovieProjectorByIdMovie;
 
     @SqlStatement(namespace = "movie_projector",value = "consult_movie_projector")
-    private static String getSqlconsultListarMovieProjector;
+    private static String getSqlconsultListMovieProjector;
     public DaoMovieProjectorMySql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate){
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
     }
 
     @Override
     public List<DtoMovieProjector> listMovieProjector() {
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlListarMovieProjector,new MapeoMovieProjector());
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlListMovieProjector,new MapperMovieProjector());
     }
 
     @Override
     public List<DtoMovieProjector> listMovieProjectorByIdMovie(Long id) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("id",id);
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlListMovieProjectorByIdMovie,parameterSource,new MapeoMovieProjector());
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlListMovieProjectorByIdMovie,parameterSource,new MapperMovieProjector());
     }
     @Override
     public DtoMovieProjector listMovieProjectoById(Long id) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("id",id);
 
-        return  this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(getSqlconsultListarMovieProjector,parameterSource,new MapeoMovieProjector());
+        return  this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(getSqlconsultListMovieProjector,parameterSource,new MapperMovieProjector());
     }
 
 

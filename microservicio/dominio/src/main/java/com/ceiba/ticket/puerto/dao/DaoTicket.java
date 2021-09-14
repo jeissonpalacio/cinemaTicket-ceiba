@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface DaoTicket {
 
-    List<DtoTicket> listarTicket();
+    List<DtoTicket> listTicket();
     List<DtoTicket> getTicketForIdClient(Long id);
 }

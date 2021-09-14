@@ -1,6 +1,6 @@
 package com.ceiba.ticket.servicio.testdatabuilder;
 
-import com.ceiba.ticket.comando.ComandoTicket;
+import com.ceiba.ticket.comando.CommandTicket;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,8 +25,8 @@ public class ComandoTicketTestDataBuilder {
             return this;
     }
 
-    public ComandoTicket build(){
-        return new ComandoTicket(idTicket,idClient,amount,idMovieProjector,idSeats);
+    public CommandTicket build(){
+        return new CommandTicket(idTicket,idClient,amount,idMovieProjector,idSeats);
     }
 
 

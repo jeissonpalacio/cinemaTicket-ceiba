@@ -65,13 +65,13 @@ public class Ticket {
         this.idMovieProjector = idMovieProjector;
         this.idSeats = idSeats;
     }
-    public void validatePrice(double price){
+    private void validatePrice(double price){
         if(price<=0){
             throw new ExcepcionQuantity(ERROR_CANTIDAD_INCORRECTA);
         }
     }
 
-    public void validarCantidad(List<Integer> listId){
+    private void validarCantidad(List<Integer> listId){
         boolean existe = listId.size()>0 && listId.size()<=2;
         if(!existe){
             throw new ExcepcionQuantity(SOLO_PUEDE_TENER_DOS_ASIENTOS);

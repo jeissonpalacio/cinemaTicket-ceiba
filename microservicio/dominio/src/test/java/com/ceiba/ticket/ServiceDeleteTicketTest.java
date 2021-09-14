@@ -25,8 +25,10 @@ public class ServiceDeleteTicketTest {
         ServiceDeleteTicket serviceDeleteTicket = new ServiceDeleteTicket(repositorioTicket, movieProjectorRepository,repositorioSeat);
         LocalDate date = LocalDate.now();
         LocalTime sixThirty = LocalTime.now();
-
-        BasePrueba.assertThrows(()-> serviceDeleteTicket.validateTimeLimit(date,sixThirty), ExcepcionTimeForChange.class,"El tiempo de cambio paso");
+        Mockito.when(movieProjectorRepository.findbyMovieProjectorForId(Mockito.anyInt())).thenReturn(new MovieProjectorTestDataBuilder().conMovieProjection(date).conHourMovie(sixThirty).build());
+        Mockito.when(repositorioTicket.validateExiste(Mockito.anyLong())).thenReturn(true);
+        Mockito.when(repositorioTicket.getTicket(1L)).thenReturn(new TicketTestDataBuilder().build());
+        BasePrueba.assertThrows(()-> serviceDeleteTicket.eliminarTicket(1L), ExcepcionTimeForChange.class,"El tiempo de cambio paso");
     }
 
     @Test
@@ -36,19 +38,10 @@ public class ServiceDeleteTicketTest {
         MovieProjectorRepository movieProjectorRepository = Mockito.mock(MovieProjectorRepository.class);
         ServiceDeleteTicket serviceDeleteTicket = new ServiceDeleteTicket(repositorioTicket, movieProjectorRepository,repositorioSeat);
         Mockito.when(repositorioTicket.validateExiste(Mockito.anyLong())).thenReturn(false);
-        BasePrueba.assertThrows(()-> serviceDeleteTicket.validateExist(1L), ExcepcionExistenceTicket.class,"No existe el ticket");
+        BasePrueba.assertThrows(()-> serviceDeleteTicket.eliminarTicket(1L), ExcepcionExistenceTicket.class,"No existe el ticket");
 
     }
-    @Test
-    public void validateExistSuccesfulTest(){
-        RepositorioTicket repositorioTicket = Mockito.mock(RepositorioTicket.class);
-        RepositorioSeat repositorioSeat = Mockito.mock(RepositorioSeat.class);
-        MovieProjectorRepository movieProjectorRepository = Mockito.mock(MovieProjectorRepository.class);
-        ServiceDeleteTicket serviceDeleteTicket = new ServiceDeleteTicket(repositorioTicket, movieProjectorRepository,repositorioSeat);
-        Mockito.when(repositorioTicket.validateExiste(Mockito.anyLong())).thenReturn(true);
-        serviceDeleteTicket.validateExist(1L);
-        Mockito.verify(repositorioTicket,Mockito.atLeastOnce()).validateExiste(1L);
-    }
+
 
     @Test
     public void obtenerTicketTest(){
@@ -62,19 +55,6 @@ public class ServiceDeleteTicketTest {
         Mockito.verify(repositorioTicket).getTicket(1L);
 
     }
-    @Test
-    public void validateTimeLimitSuccesfulTest(){
-        RepositorioTicket repositorioTicket = Mockito.mock(RepositorioTicket.class);
-        RepositorioSeat repositorioSeat = Mockito.mock(RepositorioSeat.class);
-        MovieProjectorRepository movieProjectorRepository = Mockito.mock(MovieProjectorRepository.class);
-        ServiceDeleteTicket serviceDeleteTicket = new ServiceDeleteTicket(repositorioTicket, movieProjectorRepository,repositorioSeat);
-        ServiceDeleteTicket serviceDeleteTicketSpy = Mockito.spy(serviceDeleteTicket);
-        LocalDate date = LocalDate.now().plusDays(2);
-        LocalTime sixThirty = LocalTime.now();
-        serviceDeleteTicketSpy.validateTimeLimit(date,sixThirty);
-        Mockito.verify(serviceDeleteTicketSpy).validateTimeLimit(date,sixThirty);
-    }
-
 
     @Test
     public void eliminarTicketTest(){

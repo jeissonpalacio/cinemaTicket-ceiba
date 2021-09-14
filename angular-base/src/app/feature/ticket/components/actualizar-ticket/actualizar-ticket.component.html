@@ -2,13 +2,13 @@
 
 <form [formGroup]="ticketForm">
     <div *ngIf="alert" class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Ticket comprado exitosamente!</strong> Se ha reservado tus tickets.
+        <strong>Ticket actualizado exitosamente!</strong> Se ha actualizado el ticket.
         <button (click)="closeAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div *ngIf="alerError" class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Ticket resevado no se puede comprar !</strong> No se ha comprado el ticket
+        <strong>No se pudo actualizar el ticket !</strong> No se ha podido actualizar el ticket
         <button (click)="claseAlertError()" type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
