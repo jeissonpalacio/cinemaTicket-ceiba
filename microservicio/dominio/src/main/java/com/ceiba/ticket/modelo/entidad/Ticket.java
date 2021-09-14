@@ -32,7 +32,15 @@ public class Ticket {
     Integer idMovieProjector;
     List<Integer> idSeats;
 
-
+    public Ticket(Integer idClient,Double amount,Integer idMovieProjector){
+        validarObligatorio(idClient,SE_DEBE_INGRESAR_ID_DEL_CLIENT);
+        validarObligatorio(amount,SE_DEBE_TENER_UN_MONTO);
+        ValidadorArgumento.validarPositivo(amount,SE_DEBE_TENER_UN_MONTO_REAL);
+        validarObligatorio(idMovieProjector,SE_DEBE_TENER_UN_ID_DE_LA_PROYECCION);
+        this.idClient = idClient;
+        this.amount = amount;
+        this.idMovieProjector = idMovieProjector;
+    }
 
     public Ticket(Integer idClient,Double amount,Integer idMovieProjector,List<Integer> idSeats){
         validatePrice(amount);
@@ -47,6 +55,20 @@ public class Ticket {
         this.idSeats = idSeats;
     }
 
+    public Ticket(Long idTicket, Integer idClient, Double amount, Integer idMovieProjector,List<Integer> idSeats) {
+        validatePrice(amount);
+        validarCantidad(idSeats);
+        validarObligatorio(idClient,SE_DEBE_INGRESAR_ID_DEL_CLIENT);
+        validarObligatorio(amount,SE_DEBE_TENER_UN_MONTO);
+        ValidadorArgumento.validarPositivo(amount,SE_DEBE_TENER_UN_MONTO_REAL);
+        validarObligatorio(idMovieProjector,SE_DEBE_TENER_UN_ID_DE_LA_PROYECCION);
+        this.idTicket = idTicket;
+        this.idClient = idClient;
+        this.amount = amount;
+        this.idMovieProjector = idMovieProjector;
+        this.idSeats = idSeats;
+    }
+    
     private void validatePrice(double price){
         if(price<= LIMITE_PRECIO_ERRONEO){
             throw new ExcepcionQuantity(ERROR_CANTIDAD_INCORRECTA);
