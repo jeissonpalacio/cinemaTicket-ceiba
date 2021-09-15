@@ -12,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./actualizar-ticket.component.css']
 })
 export class ActualizarTicketComponent implements OnInit {
-
+  error;
   ticket: Ticket;
   alerError: boolean=false;
   alert: boolean=false;
@@ -56,6 +56,7 @@ export class ActualizarTicketComponent implements OnInit {
                           this.ticketForm.controls.dateMovieProjector.patchValue(data.movieProjection);
                           this.ticketForm.controls.hourMovieProjector.patchValue(data.hourMovie);
                         },(error) => {
+                          this.error = JSON.stringify(error.message);
                           this.alerError = true;
                           throw new Error(error);
                         });
@@ -65,6 +66,7 @@ export class ActualizarTicketComponent implements OnInit {
                           this.seats = x;
                           this.ticketForm.patchValue(x);
                         },(error) => {
+                          this.error = JSON.stringify(error.message);
                           this.alerError = true;
                           throw new Error(error);
                         });
@@ -79,6 +81,7 @@ export class ActualizarTicketComponent implements OnInit {
       this.ticketSeats = data;
     },(error) => {
       this.alerError = true;
+      this.error = JSON.stringify(error.message);
       throw new Error(error);
     });
     this.edit = true;
@@ -97,6 +100,7 @@ export class ActualizarTicketComponent implements OnInit {
         this.edit=false;
     },(error) => {
       this.alerError = true;
+      this.error = JSON.stringify(error.message);
       throw new Error(error);
     });
   

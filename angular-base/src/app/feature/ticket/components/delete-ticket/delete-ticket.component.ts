@@ -13,6 +13,8 @@ export class DeleteTicketComponent implements OnInit {
   tickets:Ticket[];
   alert: boolean=false;
   alerError: boolean=false;
+  error;
+
   constructor(protected ticketService:TicketService) { }
 
 
@@ -29,7 +31,9 @@ export class DeleteTicketComponent implements OnInit {
     this.ticketService.listarTickerPorIdClient(this.ticketForm.value.idClient).subscribe((data)=>{
       this.tickets = data;
     },(error)=>{
-      console.log(error);
+      this.alerError=true;
+      this.error = JSON.stringify(error.message);
+      throw new Error(error);
     });
 
   }
@@ -41,6 +45,7 @@ export class DeleteTicketComponent implements OnInit {
       this.alert=true;
     },(error)=>{
       this.alerError=true;
+      this.error = JSON.stringify(error.message);
       throw new Error(error);
     });
   }

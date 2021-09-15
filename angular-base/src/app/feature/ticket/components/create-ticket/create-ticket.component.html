@@ -6,7 +6,7 @@
         </button>
       </div>
       <div *ngIf="alerError" class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Ticket resevado no se puede comprar !</strong> No se ha comprado el ticket
+        <strong>Ticket resevado no se puede comprar !</strong> <span *ngIf="error">{{error}}</span>
         <button (click)="claseAlertError()" type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

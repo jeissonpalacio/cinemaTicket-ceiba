@@ -43,8 +43,8 @@ describe('DeleteTicketComponent', () => {
      expect(component.ticketForm.valid).toBeFalsy();
      component.ticketForm.controls.idClient.setValue(1);
      expect(component.ticketForm.valid).toBeTruthy();
-     component.consultarTickets();
-     component.eliminar(ticketData[0]);
+     component.consultTickets();
+     component.deleteTicket(ticketData[0]);
      expect(ticketService.deleteTicket).toHaveBeenCalled();
 
   });

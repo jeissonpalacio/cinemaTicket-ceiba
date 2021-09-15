@@ -8,7 +8,7 @@
         </button>
       </div>
       <div *ngIf="alerError" class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>No se pudo actualizar el ticket !</strong> No se ha podido actualizar el ticket
+        <strong>No se pudo actualizar el ticket !</strong> <span>{{error}}</span>
         <button (click)="claseAlertError()" type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

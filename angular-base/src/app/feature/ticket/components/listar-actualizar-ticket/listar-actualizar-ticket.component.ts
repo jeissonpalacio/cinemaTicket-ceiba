@@ -15,6 +15,7 @@ export class ListarActualizarTicketComponent implements OnInit {
   tickets:Ticket[];
   alert: boolean=false;
   alerError: boolean=false;
+  error;
   constructor(protected ticketService:TicketService, private router: Router) { }
 
 
@@ -31,6 +32,7 @@ export class ListarActualizarTicketComponent implements OnInit {
     this.ticketService.listarTickerPorIdClient(this.ticketForm.value.idClient).subscribe((data)=>{
       this.tickets = data;
     },(error) => {
+      this.error = JSON.stringify(error.message);
       throw new Error(error);
     });
 
@@ -43,6 +45,7 @@ export class ListarActualizarTicketComponent implements OnInit {
 
   claseAlertError(){
     this.alerError=false;
+    this.error='';
   }
   closeAlert(){
     this.alert=false;

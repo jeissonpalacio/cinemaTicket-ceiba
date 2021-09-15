@@ -17,6 +17,7 @@ import { TicketService } from '../../shared/service/ticket.service';
 })
 export class CreateTicketComponent implements OnInit {
 
+  error;
   movie: Movie;
   movieProjector: MovieProjector[];
   currentProjection;
@@ -47,6 +48,7 @@ export class CreateTicketComponent implements OnInit {
       this.movieProjector = movieProjectorData;
     },(error) => {
       this.alerError = true;
+      this.error = JSON.stringify(error);
       throw new Error(error);
     })
 
@@ -58,7 +60,9 @@ export class CreateTicketComponent implements OnInit {
     this.seatService.consultar(this.currentProjection).subscribe((data) => {
       this.seat = data;
     },(error) => {
+      console.log(error)
       this.alerError = true;
+      this.error = JSON.stringify(error.message);
       throw new Error(error);
     })
     
@@ -92,7 +96,9 @@ export class CreateTicketComponent implements OnInit {
       this.alert = true;
       this.ngOnInit();
     }, (error) => {
+      console.log("desde create" + error);
       this.alerError = true;
+      this.error = JSON.stringify(error.message);
       throw new Error(error);
     });
   }
