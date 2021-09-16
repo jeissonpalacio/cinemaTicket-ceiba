@@ -76,7 +76,6 @@ export class ActualizarTicketComponent implements OnInit {
   }
 
   loadSeat(){
-    console.log('movieprojector' + this.movieProjectorData);
     this.seatService.consultar(this.movieProjectorData).subscribe((data) => {
       this.ticketSeats = data;
     },(error) => {
@@ -88,14 +87,12 @@ export class ActualizarTicketComponent implements OnInit {
   }
 
   cancel(){
-    console.log(this.ticketForm.value.ticketSeats);
     this.edit=false;
   }
 
   save(){
     let ticketnew = new Ticket(null,this.ticket.idClient,this.ticketForm.value.amount,this.ticket.idMovieProjector,[this.ticketForm.value.ticketSeats])
-    this.ticketService.actualizar(this.ticket.id,ticketnew).subscribe((data)=>{
-        console.log(data);
+    this.ticketService.actualizar(this.ticket.id,ticketnew).subscribe(()=>{
         this.alert=true;
         this.edit=false;
     },(error) => {
