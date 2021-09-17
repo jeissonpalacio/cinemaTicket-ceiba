@@ -1,18 +1,18 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { SeatService } from './../../shared/service/seats.service';
-import { Seat } from './../../shared/model/seat';
-import { MovieProjector } from './../../shared/model/projection';
+import { SeatService } from '../../shared/service/seats.service';
+import { Seat } from '../../shared/model/seat';
+import { MovieProjector } from '../../shared/model/projection';
 import {FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Ticket } from './../../shared/model/ticket';
-import { TicketService } from './../../shared/service/ticket.service';
+import { Ticket } from '../../shared/model/ticket';
+import { TicketService } from '../../shared/service/ticket.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-actualizar-ticket',
-  templateUrl: './actualizar-ticket.component.html',
-  styleUrls: ['./actualizar-ticket.component.css']
+  templateUrl: './update-ticket.component.html',
+  styleUrls: ['./update-ticket.component.css']
 })
-export class ActualizarTicketComponent implements OnInit {
+export class UpdateTicketComponent implements OnInit {
   error;
   ticket: Ticket;
   alerError: boolean=false;

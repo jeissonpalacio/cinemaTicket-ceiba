@@ -1,5 +1,5 @@
-import { ActualizarTicketComponent } from './components/actualizar-ticket/actualizar-ticket.component';
-import { ListarActualizarTicketComponent } from './components/listar-actualizar-ticket/listar-actualizar-ticket.component';
+import { UpdateTicketComponent } from './components/actualizar-ticket/update-ticket.component';
+import { ListUpdateTicketComponent } from './components/listar-actualizar-ticket/list-update-ticket.component';
 import { DeleteTicketComponent } from './components/delete-ticket/delete-ticket.component';
 import { TicketComponent } from './components/ticket/ticket.component';
 import { CreateTicketComponent } from './components/create-ticket/create-ticket.component';
@@ -17,7 +17,7 @@ const routes: Routes = [
       },
       {
         path:'edit',
-        component:ListarActualizarTicketComponent
+        component:ListUpdateTicketComponent
       },
       {
         path:'delete',
@@ -25,7 +25,7 @@ const routes: Routes = [
       },
       {
         path:'update',
-        component:ActualizarTicketComponent
+        component:UpdateTicketComponent
       }
     ]
   }

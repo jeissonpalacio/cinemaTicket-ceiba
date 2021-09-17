@@ -1,16 +1,16 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { TicketService } from './../../shared/service/ticket.service';
-import { Ticket } from './../../shared/model/ticket';
+import { TicketService } from '../../shared/service/ticket.service';
+import { Ticket } from '../../shared/model/ticket';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-listar-actualizar-ticket',
-  templateUrl: './listar-actualizar-ticket.component.html',
-  styleUrls: ['./listar-actualizar-ticket.component.css']
+  selector: 'app-list-update-ticket',
+  templateUrl: './list-update-ticket.component.html',
+  styleUrls: ['./list-update-ticket.component.css']
 })
-export class ListarActualizarTicketComponent implements OnInit {
+export class ListUpdateTicketComponent implements OnInit {
 
   ticketForm:FormGroup;
   tickets:Ticket[];
