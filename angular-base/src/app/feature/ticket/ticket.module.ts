@@ -9,8 +9,8 @@ import { CreateTicketComponent } from './components/create-ticket/create-ticket.
 import { SharedModule } from '@shared/shared.module';
 import { TicketService } from './shared/service/ticket.service';
 import { DeleteTicketComponent } from './components/delete-ticket/delete-ticket.component';
-import { ListUpdateTicketComponent } from './components/listar-actualizar-ticket/list-update-ticket.component';
-import { UpdateTicketComponent } from './components/actualizar-ticket/update-ticket.component';
+import { ListUpdateTicketComponent } from './components/list-update-ticket/list-update-ticket.component';
+import { UpdateTicketComponent } from './components/update-ticket/update-ticket.component';
 
 
 @NgModule({

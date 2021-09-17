@@ -1,5 +1,5 @@
-import { UpdateTicketComponent } from './components/actualizar-ticket/update-ticket.component';
-import { ListUpdateTicketComponent } from './components/listar-actualizar-ticket/list-update-ticket.component';
+import { UpdateTicketComponent } from './components/update-ticket/update-ticket.component';
+import { ListUpdateTicketComponent } from './components/list-update-ticket/list-update-ticket.component';
 import { DeleteTicketComponent } from './components/delete-ticket/delete-ticket.component';
 import { TicketComponent } from './components/ticket/ticket.component';
 import { CreateTicketComponent } from './components/create-ticket/create-ticket.component';
