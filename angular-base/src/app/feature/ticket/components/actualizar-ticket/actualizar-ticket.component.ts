@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { SeatService } from './../../shared/service/seats.service';
 import { Seat } from './../../shared/model/seat';
 import { MovieProjector } from './../../shared/model/projection';
@@ -55,20 +56,20 @@ export class ActualizarTicketComponent implements OnInit {
                           this.ticketForm.controls.movieProjector.patchValue(data.id);
                           this.ticketForm.controls.dateMovieProjector.patchValue(data.movieProjection);
                           this.ticketForm.controls.hourMovieProjector.patchValue(data.hourMovie);
-                        },(error) => {
-                          this.error = JSON.stringify(error.message);
+                        },(err:HttpErrorResponse) => {
                           this.alerError = true;
-                          throw new Error(error);
+                          this.error = err.error.mensaje;
+                          throw new Error(err.error.mensaje);
                         });
 
       this.ticketService.listarSeatPorIdDelTicket(this.ticket.id)
                         .subscribe(x=>{
                           this.seats = x;
                           this.ticketForm.patchValue(x);
-                        },(error) => {
-                          this.error = JSON.stringify(error.message);
+                        },(err:HttpErrorResponse) => {
                           this.alerError = true;
-                          throw new Error(error);
+                          this.error = err.error.mensaje;
+                          throw new Error(err.error.mensaje);
                         });
       
 
@@ -78,10 +79,10 @@ export class ActualizarTicketComponent implements OnInit {
   loadSeat(){
     this.seatService.consultar(this.movieProjectorData).subscribe((data) => {
       this.ticketSeats = data;
-    },(error) => {
+    },(err:HttpErrorResponse) => {
       this.alerError = true;
-      this.error = JSON.stringify(error.message);
-      throw new Error(error);
+      this.error = err.error.mensaje;
+      throw new Error(err.error.mensaje);
     });
     this.edit = true;
   }
@@ -92,15 +93,18 @@ export class ActualizarTicketComponent implements OnInit {
 
   save(){
     let ticketnew = new Ticket(null,this.ticket.idClient,this.ticketForm.value.amount,this.ticket.idMovieProjector,[this.ticketForm.value.ticketSeats])
+    console.log(ticketnew);
+    console.log(this.ticket.id)
     this.ticketService.actualizar(this.ticket.id,ticketnew).subscribe(()=>{
         this.alert=true;
         this.edit=false;
-    },(error) => {
+        
+    },(err:HttpErrorResponse) => {
       this.alerError = true;
-      this.error = JSON.stringify(error.message);
-      throw new Error(error);
+      this.error = err.error.mensaje;
+      throw new Error(err.error.mensaje);
     });
-  
+    
   }
   
   claseAlertError(){

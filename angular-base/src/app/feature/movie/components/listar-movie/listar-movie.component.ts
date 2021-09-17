@@ -20,7 +20,6 @@ export class ListarMovieComponent implements OnInit {
   }
 
   buyTicket(movie:Movie){
-    console.log(movie);
     this.router.navigate(['ticket/create',{movie: JSON.stringify(movie)}]);
   }
 

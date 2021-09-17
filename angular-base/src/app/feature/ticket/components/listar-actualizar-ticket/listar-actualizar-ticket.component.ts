@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { TicketService } from './../../shared/service/ticket.service';
 import { Ticket } from './../../shared/model/ticket';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -31,9 +32,10 @@ export class ListarActualizarTicketComponent implements OnInit {
   consultTickets(){
     this.ticketService.listarTickerPorIdClient(this.ticketForm.value.idClient).subscribe((data)=>{
       this.tickets = data;
-    },(error) => {
-      this.error = JSON.stringify(error.message);
-      throw new Error(error);
+    },(err:HttpErrorResponse) => {
+      this.alerError = true;
+      this.error = err.error.mensaje;
+      throw new Error(err.error.mensaje);
     });
 
   }

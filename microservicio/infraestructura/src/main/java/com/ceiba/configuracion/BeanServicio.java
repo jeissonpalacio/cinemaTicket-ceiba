@@ -1,12 +1,12 @@
 package com.ceiba.configuracion;
 
-import com.ceiba.movie_projector.puerto.repositorio.MovieProjectorRepository;
-import com.ceiba.seats.puerto.repositorio.RepositorioSeat;
-import com.ceiba.ticket.puerto.repositorio.RepositorioTicket;
-import com.ceiba.ticket.servicio.ServiceCalculateHalfPrice;
-import com.ceiba.ticket.servicio.ServiceCreateTicket;
-import com.ceiba.ticket.servicio.ServiceUpdateTicket;
-import com.ceiba.ticket.servicio.ServiceDeleteTicket;
+import com.ceiba.asientos.puerto.repositorio.RepositorioAsiento;
+import com.ceiba.boleto.puerto.repositorio.RepositorioBoleto;
+import com.ceiba.boleto.servicio.ServicioActualizarBoleto;
+import com.ceiba.boleto.servicio.ServicioCalcularDescuento;
+import com.ceiba.boleto.servicio.ServicioCrearBoleto;
+import com.ceiba.proyeccion_cine.puerto.repositorio.RepositorioProyeccionCine;
+import com.ceiba.boleto.servicio.ServicioBorrarBoleto;
 import com.ceiba.usuario.puerto.repositorio.RepositorioUsuario;
 import com.ceiba.usuario.servicio.ServicioActualizarUsuario;
 import com.ceiba.usuario.servicio.ServicioCrearUsuario;
@@ -19,8 +19,8 @@ public class BeanServicio {
 
 
     @Bean
-    public ServiceCalculateHalfPrice serviceCalculateHalfPrice(){
-        return new ServiceCalculateHalfPrice();
+    public ServicioCalcularDescuento serviceCalculateHalfPrice(){
+        return new ServicioCalcularDescuento();
     }
     @Bean
     public ServicioCrearUsuario servicioCrearUsuario(RepositorioUsuario repositorioUsuario) {
@@ -28,17 +28,17 @@ public class BeanServicio {
     }
 
     @Bean
-    public ServiceDeleteTicket servicioEliminarTicket(RepositorioTicket repositorioTicket,
-                                                      MovieProjectorRepository movieProjectorRepository,
-                                                      RepositorioSeat repositorioSeat){
-        return new ServiceDeleteTicket(repositorioTicket, movieProjectorRepository,repositorioSeat);
+    public ServicioBorrarBoleto servicioEliminarTicket(RepositorioBoleto repositorioBoleto,
+                                                       RepositorioProyeccionCine repositorioProyeccionCine,
+                                                       RepositorioAsiento repositorioAsiento){
+        return new ServicioBorrarBoleto(repositorioBoleto, repositorioProyeccionCine, repositorioAsiento);
 
     }
     @Bean
-    public ServiceUpdateTicket servicioActualizarTicket(RepositorioTicket repositorioTicket,
-                                                        RepositorioSeat repositorioSeat,
-                                                        MovieProjectorRepository movieProjectorRepository){
-        return new ServiceUpdateTicket(repositorioTicket,repositorioSeat, movieProjectorRepository);
+    public ServicioActualizarBoleto servicioActualizarTicket(RepositorioBoleto repositorioBoleto,
+                                                             RepositorioAsiento repositorioAsiento,
+                                                             RepositorioProyeccionCine repositorioProyeccionCine){
+        return new ServicioActualizarBoleto(repositorioBoleto, repositorioAsiento, repositorioProyeccionCine);
     }
 
     @Bean
@@ -52,9 +52,9 @@ public class BeanServicio {
     }
 
     @Bean
-    public ServiceCreateTicket servicioCrearTicket(RepositorioTicket repositorioTicket, RepositorioSeat repositorioSeat,
-                                                   MovieProjectorRepository movieProjectorRepository, ServiceCalculateHalfPrice serviceCalculateHalfPrice){
-        return new ServiceCreateTicket(repositorioTicket,repositorioSeat, movieProjectorRepository,serviceCalculateHalfPrice);
+    public ServicioCrearBoleto servicioCrearTicket(RepositorioBoleto repositorioBoleto, RepositorioAsiento repositorioAsiento,
+                                                   RepositorioProyeccionCine repositorioProyeccionCine, ServicioCalcularDescuento servicioCalcularDescuento){
+        return new ServicioCrearBoleto(repositorioBoleto, repositorioAsiento, repositorioProyeccionCine, servicioCalcularDescuento);
     }
 	
 

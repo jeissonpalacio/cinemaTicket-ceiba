@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { MovieService } from './../../../movie/shared/service/movie.service';
 import { Ticket } from './../../shared/model/ticket';
 import { SeatService } from './../../shared/service/seats.service';
@@ -46,10 +47,10 @@ export class CreateTicketComponent implements OnInit {
 
     this.movieProjectorService.consultar(this.movie).subscribe((movieProjectorData) => {
       this.movieProjector = movieProjectorData;
-    },(error) => {
+    },(err:HttpErrorResponse) => {
       this.alerError = true;
-      this.error = JSON.stringify(error);
-      throw new Error(error);
+      this.error = err.error.mensaje;
+      throw new Error(err.error.mensaje);
     })
 
     this.construirFormulario();
@@ -59,11 +60,10 @@ export class CreateTicketComponent implements OnInit {
     this.currentProjection = movieProjector;
     this.seatService.consultar(this.currentProjection).subscribe((data) => {
       this.seat = data;
-    },(error) => {
-      console.log(error)
+    },(err:HttpErrorResponse) => {
       this.alerError = true;
-      this.error = JSON.stringify(error.message);
-      throw new Error(error);
+      this.error = err.error.mensaje;
+      throw new Error(err.error.mensaje);
     })
     
 
@@ -90,16 +90,14 @@ export class CreateTicketComponent implements OnInit {
       return value.id;
     })
     this.ticket = new Ticket(undefined, this.ticketForm.value.idClient, amount, this.currentProjection.id, tickets);
-    this.ticketService.crear(this.ticket).subscribe((ticket) => {
-      console.log(ticket);
+    this.ticketService.crear(this.ticket).subscribe(() => {
       this.seatTicket = [];
       this.alert = true;
       this.ngOnInit();
-    }, (error) => {
-      console.log("desde create" + error);
+    },(err:HttpErrorResponse) => {
       this.alerError = true;
-      this.error = JSON.stringify(error.message);
-      throw new Error(error);
+      this.error = err.error.mensaje;
+      throw new Error(err.error.mensaje);
     });
   }
   claseAlertError() {

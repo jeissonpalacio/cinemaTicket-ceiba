@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Ticket } from './../../shared/model/ticket';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -30,23 +31,24 @@ export class DeleteTicketComponent implements OnInit {
   consultTickets(){
     this.ticketService.listarTickerPorIdClient(this.ticketForm.value.idClient).subscribe((data)=>{
       this.tickets = data;
-    },(error)=>{
-      this.alerError=true;
-      this.error = JSON.stringify(error.message);
-      throw new Error(error);
+    },(err:HttpErrorResponse) => {
+      this.alerError = true;
+      this.error = err.error.mensaje;
+      throw new Error(err.error.mensaje);
     });
 
   }
   deleteTicket(ticket:Ticket){
-    console.log(ticket);
-    this.ticketService.deleteTicket(ticket.id).subscribe((ticket)=>{
-      console.log(ticket);
+    this.ticketService.deleteTicket(ticket.id).subscribe(()=>{
       this.ngOnInit();
       this.alert=true;
-    },(error)=>{
-      this.alerError=true;
-      this.error = JSON.stringify(error.message);
-      throw new Error(error);
+    },(err:HttpErrorResponse) => {
+      this.alerError = true;
+      console.log(err.status);
+      console.log(err);
+      console.log(err.error.mensaje);
+      this.error = err.error.mensaje;
+      throw new Error(err.error.mensaje);
     });
   }
 
