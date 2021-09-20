@@ -18,7 +18,7 @@ public class TicketTestDataBuilder {
         this.idClient = 1;
         this.amount = 15000.00;
         this.idMovieProjector = 1;
-        this.idSeats = Arrays.asList(1);
+        this.idSeats = Arrays.asList(1,2);
     }
 
     public Boleto build(){

@@ -1,4 +1,4 @@
-import { TicketUpdate } from './../page/ticket/ticket-update.po';
+import { TicketDelete } from './../page/ticket/ticket-delete.po';
 import { TicketPage } from '../page/ticket/ticket-create.po';
 import { MoviePage } from '../page/movie/movie.po';
 import { NavbarPage } from '../page/navbar/navbar.po';
@@ -9,14 +9,14 @@ describe('workspace-project Producto', () => {
     let navBar: NavbarPage;
     let moviePage:MoviePage;
     let ticketPage:TicketPage;
-    let ticketUpdate:TicketUpdate;
+    let ticketDelete:TicketDelete;
 
     beforeEach(() => {
         page = new AppPage();
         navBar = new NavbarPage();
         moviePage = new MoviePage();
         ticketPage = new TicketPage();
-        ticketUpdate = new TicketUpdate();
+        ticketDelete = new TicketDelete();
     });
 
     it("the actor edit the ticket page",()=>{
@@ -24,13 +24,9 @@ describe('workspace-project Producto', () => {
         navBar.clickBottonMoviePage();
         moviePage.clickRouteLinkMovieList();
         moviePage.clickButtomBuy();
-        ticketUpdate.navigiteToEditPage();
-        ticketUpdate.sendKeyInputSearchId();
-        ticketUpdate.clickUpgradeButton();
-        ticketUpdate.clickUpdateButton();
-        ticketUpdate.clickSelectSeat();
-        ticketUpdate.clickSelectOption();
-        ticketUpdate.clickSelectSave();
+        ticketDelete.navigateToDeletePage();
+        ticketDelete.sendKeyInputSearchId();
+        ticketDelete.clickSearchListForDelete();
     })
 
 });

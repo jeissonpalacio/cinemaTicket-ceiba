@@ -10,7 +10,7 @@ export class TicketUpdate{
     private selectOption = element(by.xpath("//option[not(@disabled)][1]"));
     private selectSave = element(by.xpath("//button[contains(text(),'Guardar')]"));
 
-    async navagiteToEditPage(){
+    async navigiteToEditPage(){
         await this.navigateToEdit.click();
     }
     async sendKeyInputSearchId(){

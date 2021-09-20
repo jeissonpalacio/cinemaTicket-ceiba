@@ -26,13 +26,13 @@
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Elimiar</th>
+                <th>Borrar</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let ticket of tickets">
                 <th scope="row">{{ticket.id}}</th>
-                <td><button (click)="deleteTicket(ticket)" type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+                <td><button (click)="deleteTicket(ticket)" type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Borrar</button></td>
               </tr>
             </tbody>
           </table>
