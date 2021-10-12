@@ -40,3 +40,7 @@ Despu&eacute;s de importar el proyecto se muestra de la siguiente manera
 
 
 Hash de git relacionado: aa90e55b
+
+
+
+# Pendiente implementacion de ngrx/entity

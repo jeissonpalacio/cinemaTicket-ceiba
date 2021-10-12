@@ -1,3 +1,4 @@
+import { MovieStoreModule } from './movie-store.module';
 import { MovieComponent } from './components/movie/movie.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -16,7 +17,9 @@ const routes: Routes = [
   }
 ];
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes),
+    MovieStoreModule
+  ],
   exports: [RouterModule]
 })
 export class MovieRoutingModule { }

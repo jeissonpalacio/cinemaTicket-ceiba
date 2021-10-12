@@ -12,11 +12,15 @@ import { Component, OnInit } from '@angular/core';
 export class ListMovieComponent implements OnInit {
   public listMovie: Observable<Movie[]>;
 
+  //entities$ = this.store.pipe(select(selectAllMovies));
+
   constructor(protected movieService:MovieService,private router: Router) { }
 
   ngOnInit(): void {
   
     this.listMovie = this.movieService.consultMovie();
+
+    ///this.store.dispatch(fromMovieActions.getMovieRequestStarted());
   }
 
   buyTicket(movie:Movie){
