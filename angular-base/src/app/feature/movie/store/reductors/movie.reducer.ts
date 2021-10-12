@@ -5,7 +5,7 @@ import { Action, createReducer ,on} from '@ngrx/store';
 
 
 
-export const ENTITY_FEATURE_KEY = 'entity';
+export const MovieFeatureKey = 'Movie';
 
 
 export interface State extends EntityState<Movie>{
